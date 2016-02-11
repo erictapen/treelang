@@ -48,6 +48,12 @@ public class ForLoop extends Expression {
 	public Expression getExpression() {
 		return expression;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		String res = "for\n";
+		String body = iterator.toString() + "\n" + amount.toString() + "\n" + expression.toString();
+		for(String x : body.split("\n")) res += "\t" + x + "\n";
+		return res;
+	}
 }

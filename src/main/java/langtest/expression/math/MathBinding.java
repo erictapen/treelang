@@ -46,6 +46,7 @@ public class MathBinding extends Math {
 
 	@Override
 	public String toString() {
+		if(value == null) return this.identifier;
 		String res = "define " + this.identifier + "\n";
 		for(String x : this.value.toString().split("\n")) {
 			res += "\t" + x + "\n";

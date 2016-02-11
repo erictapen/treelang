@@ -50,7 +50,7 @@ public class LangDrawer extends  PApplet {
 						),
 						new Color(
 							new Number(255),
-							new Number(255),
+							new Number(0),
 							new Number(255)
 						)
 					)
