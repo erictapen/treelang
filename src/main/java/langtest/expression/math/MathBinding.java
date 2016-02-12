@@ -20,7 +20,7 @@ public class MathBinding extends Math {
 		return res;
 	}
 
-	public int eval() {
+	public int eval() throws MathException {
 		return value.eval();
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import langtest.expression.math.Math;
 import langtest.expression.math.MathBinding;
+import langtest.expression.math.MathException;
 import langtest.expression.math.Number;
 
 public class ForLoop extends Expression {
@@ -27,13 +28,19 @@ public class ForLoop extends Expression {
 		return res;
 	}
 	
-	public void draw(PApplet p) {
+	public void draw(PApplet p) throws TypeException {
 		ArrayList<MathBinding> iteratorOccurences = new ArrayList<MathBinding>();
 		for(Expression x : expression.getSubTree()) {
 			if(x instanceof MathBinding && ((MathBinding) x).getIdentifier().equals(iterator.getIdentifier())) 
 				iteratorOccurences.add((MathBinding) x);
 		}
-		for (int i = 0; i < amount.eval(); i++) {
+		int max;
+		try{
+			max = amount.eval();
+		} catch (MathException e) {
+			throw new TypeException();
+		}
+		for (int i = 0; i < max; i++) {
 			for(MathBinding x : iteratorOccurences) x.setValue(new Number(i));
 			expression.draw(p);
 		}

@@ -4,7 +4,7 @@ import langtest.expression.Expression;
 
 public abstract class Math extends Expression {
 
-	public int eval() {
+	public int eval() throws MathException {
 		return 0;
 	}
 

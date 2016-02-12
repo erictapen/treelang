@@ -24,7 +24,6 @@ public class Number extends Math {
 		return true;
 	}
 
-
 	public String toString() {
 		return new Integer(this.value).toString();
 	}

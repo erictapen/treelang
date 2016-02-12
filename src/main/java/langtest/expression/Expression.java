@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class Expression {
 	
-	public void draw(PApplet p) {
+	public void draw(PApplet p) throws TypeException {
 		
 	}
 	

@@ -3,6 +3,8 @@ package langtest.expression.picture;
 import java.util.ArrayList;
 
 import langtest.expression.Expression;
+import langtest.expression.TypeException;
+import langtest.expression.math.MathException;
 import langtest.expression.math.Point;
 import processing.core.PApplet;
 
@@ -26,17 +28,21 @@ public class Rectangle extends Picture {
 		return res;
 	}
 	
-	public void draw(PApplet p) {
-		p.fill((float) color.getRed().eval(),
-				(float) color.getGreen().eval(),
-				(float) color.getBlue().eval());
-		p.stroke((float) color.getRed().eval(),
-				(float) color.getGreen().eval(),
-				(float) color.getBlue().eval());
-		p.rect( p1.getX().eval(), 
-				p1.getY().eval(), 
-				p2.getX().eval(), 
-				p2.getY().eval());
+	public void draw(PApplet p) throws TypeException {
+		try{
+			p.fill((float) color.getRed().eval(),
+					(float) color.getGreen().eval(),
+					(float) color.getBlue().eval());
+			p.stroke((float) color.getRed().eval(),
+					(float) color.getGreen().eval(),
+					(float) color.getBlue().eval());
+			p.rect( p1.getX().eval(), 
+					p1.getY().eval(), 
+					p2.getX().eval(), 
+					p2.getY().eval());
+		} catch (MathException e) {
+			throw new TypeException();
+		}
 	}
 
 	@Override

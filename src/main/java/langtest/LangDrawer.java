@@ -60,7 +60,15 @@ public class LangDrawer extends  PApplet {
 	
 	
 	public void draw() {
-		root.draw(this);
+		clear();
+		loadPixels();
+		try {
+			root.draw(this);
+		} catch (TypeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		updatePixels();
 		//System.out.println("Frame rendered.");
 	}
 }

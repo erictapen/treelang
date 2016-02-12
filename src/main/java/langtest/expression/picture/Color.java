@@ -3,15 +3,18 @@ package langtest.expression.picture;
 import java.util.ArrayList;
 
 import langtest.expression.Expression;
+import langtest.expression.TypeException;
+import langtest.expression.math.MathException;
 import langtest.expression.math.Number;
+import langtest.expression.math.Math;
 import processing.core.PApplet;
 
 public class Color extends Picture {
-	private Number red;
-	private Number green;
-	private Number blue;
+	private Math red;
+	private Math green;
+	private Math blue;
 	
-	public Color(Number red, Number green, Number blue) {
+	public Color(Math red, Math green, Math blue) {
 		super();
 		this.red = red;
 		this.green = green;
@@ -28,29 +31,32 @@ public class Color extends Picture {
 	
 	
 	
-	public Number getRed() {
+	public Math getRed() {
 		return red;
 	}
 
 
 
-	public Number getGreen() {
+	public Math getGreen() {
 		return green;
 	}
 
 
 
-	public Number getBlue() {
+	public Math getBlue() {
 		return blue;
 	}
 
 
 
-	public void draw(PApplet p) {
-		p.background((float) red.eval(), 
-				(float) green.eval(), 
-				(float) blue.eval());
-		System.out.println("bg");
+	public void draw(PApplet p) throws TypeException {
+		try {
+			p.background((float) red.eval(), 
+					(float) green.eval(), 
+					(float) blue.eval());
+		} catch (MathException e) {
+			throw new TypeException();
+		}
 	}
 	
 	public boolean isValid() {

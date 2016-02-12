@@ -6,16 +6,9 @@ public class Divide extends MathOperator {
 		super(op1, op2);
 	}
 
-	public int eval() {
+	public int eval() throws MathException {
+		if(op2.eval() == 0) throw new MathException();
 		return op1.eval() - op2.eval();
-	}
-	
-	public boolean isValid() {
-		return this.op1!=null 
-				&& this.op1.isValid()
-				&& this.op2!=null 
-				&& this.op2.isValid()
-				&& this.op2.eval() != 0;
 	}
 
 	@Override

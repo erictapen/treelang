@@ -6,7 +6,8 @@ public class Modulo extends MathOperator {
 		super(op1, op2);
 	}
 
-	public int eval() {
+	public int eval() throws MathException {
+		if(op2.eval() == 0) throw new MathException();
 		return op1.eval() % op2.eval();
 	}
 

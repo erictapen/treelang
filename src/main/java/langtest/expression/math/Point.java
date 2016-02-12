@@ -2,9 +2,12 @@ package langtest.expression.math;
 
 import java.util.ArrayList;
 
+import processing.core.PApplet;
 import langtest.expression.Expression;
+import langtest.expression.TypeException;
+import langtest.expression.picture.Picture;
 
-public class Point extends Math {
+public class Point extends Picture{
 	private Math x;
 	private Math y;
 	
@@ -21,6 +24,14 @@ public class Point extends Math {
 		return res;
 	}
 	
+	public void draw(PApplet p) throws TypeException {
+		try{
+			(p.pixels)[y.eval() * p.width + x.eval()] = 0xffffff;
+		} catch (MathException e) {
+			throw new TypeException();
+		}
+	}
+	
 	public Math getX() {
 		return x;
 	}
@@ -29,7 +40,6 @@ public class Point extends Math {
 		return y;
 	}
 
-	@Override
 	public String toString() {
 		String res = "point\n";
 		String body = this.x.toString() + "\n" + this.y.toString();

@@ -3,12 +3,13 @@ package langtest.expression.picture;
 import java.util.ArrayList;
 
 import langtest.expression.Expression;
+import langtest.expression.TypeException;
 import processing.core.PApplet;
 
 public class Picture extends Expression {
 	private ArrayList<Expression> items;
 	
-	public void draw(PApplet p) {
+	public void draw(PApplet p) throws TypeException {
 		for(Expression x : items) x.draw(p);
 	}
 	
