@@ -26,7 +26,9 @@ public class Point extends Picture{
 	
 	public void draw(PApplet p) throws TypeException {
 		try{
-			(p.pixels)[y.eval() * p.width + x.eval()] = 0xffffff;
+			p.fill(255, 255, 255);
+			p.stroke(255, 255, 255);
+			p.rect(x.eval(), y.eval(), 1, 1);
 		} catch (MathException e) {
 			throw new TypeException();
 		}
