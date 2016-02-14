@@ -2,7 +2,7 @@ package langtest.expression.math;
 
 public class Divide extends MathOperator {
 
-	public Divide(Math op1, Math op2) {
+	public Divide(MathExpression op1, MathExpression op2) {
 		super(op1, op2);
 	}
 

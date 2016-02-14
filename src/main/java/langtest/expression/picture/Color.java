@@ -6,15 +6,15 @@ import langtest.expression.Expression;
 import langtest.expression.TypeException;
 import langtest.expression.math.MathException;
 import langtest.expression.math.Number;
-import langtest.expression.math.Math;
+import langtest.expression.math.MathExpression;
 import processing.core.PApplet;
 
 public class Color extends Picture {
-	private Math red;
-	private Math green;
-	private Math blue;
+	private MathExpression red;
+	private MathExpression green;
+	private MathExpression blue;
 	
-	public Color(Math red, Math green, Math blue) {
+	public Color(MathExpression red, MathExpression green, MathExpression blue) {
 		super();
 		this.red = red;
 		this.green = green;
@@ -31,19 +31,19 @@ public class Color extends Picture {
 	
 	
 	
-	public Math getRed() {
+	public MathExpression getRed() {
 		return red;
 	}
 
 
 
-	public Math getGreen() {
+	public MathExpression getGreen() {
 		return green;
 	}
 
 
 
-	public Math getBlue() {
+	public MathExpression getBlue() {
 		return blue;
 	}
 

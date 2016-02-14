@@ -37,4 +37,8 @@ public class Expression {
 		return "";
 	}
 	
+	public void mutate() {
+		
+	}
+	
 }

@@ -2,7 +2,7 @@ package langtest.expression.math;
 
 public class Modulo extends MathOperator {
 
-	public Modulo(Math op1, Math op2) {
+	public Modulo(MathExpression op1, MathExpression op2) {
 		super(op1, op2);
 	}
 

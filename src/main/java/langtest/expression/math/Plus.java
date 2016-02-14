@@ -2,7 +2,7 @@ package langtest.expression.math;
 
 public class Plus extends MathOperator {
 
-	public Plus(Math op1, Math op2) {
+	public Plus(MathExpression op1, MathExpression op2) {
 		super(op1, op2);
 	}
 

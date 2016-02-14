@@ -3,17 +3,18 @@ package langtest.expression;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import langtest.expression.math.Math;
 import langtest.expression.math.MathBinding;
 import langtest.expression.math.MathException;
+import langtest.expression.math.MathExpression;
 import langtest.expression.math.Number;
+import langtest.expression.math.Plus;
 
 public class ForLoop extends Expression {
 	private MathBinding iterator;
-	private Math amount;
+	private MathExpression amount;
 	private Expression expression;
 	
-	public ForLoop(MathBinding iterator, Math amount, Expression expression) {
+	public ForLoop(MathBinding iterator, MathExpression amount, Expression expression) {
 		super();
 		this.iterator = iterator;
 		this.amount = amount;
@@ -49,7 +50,7 @@ public class ForLoop extends Expression {
 	public MathBinding getIterator() {
 		return iterator;
 	}
-	public Math getAmount() {
+	public MathExpression getAmount() {
 		return amount;
 	}
 	public Expression getExpression() {
@@ -62,5 +63,12 @@ public class ForLoop extends Expression {
 		String body = iterator.toString() + "\n" + amount.toString() + "\n" + expression.toString();
 		for(String x : body.split("\n")) res += "\t" + x + "\n";
 		return res;
+	}
+	
+	public void mutate() {
+		Number n;
+		if(Math.random() > 0.5) n = new Number(1);
+		else n = new Number(-1);
+		this.amount = new Plus(this.amount, n);
 	}
 }

@@ -1,6 +1,6 @@
 package langtest.expression.math;
 
-public class Number extends Math {
+public class Number extends MathExpression {
 	private int value;
 
 	public Number(int value) {
@@ -26,6 +26,11 @@ public class Number extends Math {
 
 	public String toString() {
 		return new Integer(this.value).toString();
+	}
+	
+	public void mutate() {
+		if(Math.random() > 0.5) value++;
+		else value--;
 	}
 	
 	

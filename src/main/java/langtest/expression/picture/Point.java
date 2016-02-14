@@ -1,17 +1,18 @@
-package langtest.expression.math;
+package langtest.expression.picture;
 
 import java.util.ArrayList;
 
 import processing.core.PApplet;
 import langtest.expression.Expression;
 import langtest.expression.TypeException;
-import langtest.expression.picture.Picture;
+import langtest.expression.math.MathException;
+import langtest.expression.math.MathExpression;
 
 public class Point extends Picture{
-	private Math x;
-	private Math y;
+	private MathExpression x;
+	private MathExpression y;
 	
-	public Point(Math x, Math y) {
+	public Point(MathExpression x, MathExpression y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -34,11 +35,11 @@ public class Point extends Picture{
 		}
 	}
 	
-	public Math getX() {
+	public MathExpression getX() {
 		return x;
 	}
 	
-	public Math getY() {
+	public MathExpression getY() {
 		return y;
 	}
 

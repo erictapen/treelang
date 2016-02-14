@@ -2,7 +2,7 @@ package langtest.expression.math;
 
 public class Minus extends MathOperator {
 
-	public Minus(Math op1, Math op2) {
+	public Minus(MathExpression op1, MathExpression op2) {
 		super(op1, op2);
 	}
 

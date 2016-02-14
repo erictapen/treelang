@@ -43,5 +43,9 @@ public class Binding extends Expression {
 		return res;
 	}
 	
+	public void mutate() {
+		
+	}
+	
 	
 }

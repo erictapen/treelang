@@ -2,7 +2,7 @@ package langtest.expression.math;
 
 public class Multiply extends MathOperator {
 
-	public Multiply(Math op1, Math op2) {
+	public Multiply(MathExpression op1, MathExpression op2) {
 		super(op1, op2);
 	}
 

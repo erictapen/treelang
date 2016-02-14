@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import langtest.expression.Expression;
 import langtest.expression.TypeException;
 import langtest.expression.math.MathException;
-import langtest.expression.math.Point;
 import processing.core.PApplet;
 
 public class Rectangle extends Picture {

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import langtest.expression.Expression;
 
-public class MathBinding extends Math {
+public class MathBinding extends MathExpression {
 	private String identifier;
-	private Math value;
+	private MathExpression value;
 	
-	public MathBinding(String identifier, Math value) {
+	public MathBinding(String identifier, MathExpression value) {
 		super();
 		this.identifier = identifier;
 		this.value = value;
@@ -28,11 +28,11 @@ public class MathBinding extends Math {
 		return identifier;
 	}
 
-	public Math getValue() {
+	public MathExpression getValue() {
 		return value;
 	}
 	
-	public void setValue(Math value) {
+	public void setValue(MathExpression value) {
 		this.value = value;
 	}
 

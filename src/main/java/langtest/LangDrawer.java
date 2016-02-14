@@ -1,12 +1,14 @@
 package langtest;
 
+import java.util.ArrayList;
+
 import langtest.expression.*;
 import langtest.expression.math.MathBinding;
 import langtest.expression.math.Multiply;
 import langtest.expression.math.Number;
 import langtest.expression.math.Plus;
-import langtest.expression.math.Point;
 import langtest.expression.picture.Color;
+import langtest.expression.picture.Point;
 import langtest.expression.picture.Rectangle;
 import processing.core.PApplet;
 
@@ -61,13 +63,14 @@ public class LangDrawer extends  PApplet {
 	
 	public void draw() {
 		clear();
+		ArrayList<Expression> list = root.getSubTree();
+		Expression mutant = list.get((int) (Math.random() * list.size()));
+		mutant.mutate();
 		try {
 			root.draw(this);
 		} catch (TypeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			System.out.println("Fail");
 		}
-		System.out.println("Frame rendered.");
+		System.out.println(root);
 	}
 }
