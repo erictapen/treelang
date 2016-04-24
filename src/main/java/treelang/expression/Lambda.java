@@ -3,6 +3,7 @@ package treelang.expression;
 import java.util.ArrayList;
 
 public class Lambda extends Expression {
+	@SuppressWarnings("unused")
 	private ArrayList<Binding> variables;
 	private Expression expression;
 	

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import treelang.expression.Expression;
 import treelang.expression.TypeException;
 import treelang.expression.math.MathException;
-import treelang.expression.math.Number;
 import treelang.expression.math.MathExpression;
 import processing.core.PApplet;
 
