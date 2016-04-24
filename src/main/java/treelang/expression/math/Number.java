@@ -1,4 +1,4 @@
-package langtest.expression.math;
+package treelang.expression.math;
 
 public class Number extends MathExpression {
 	private int value;

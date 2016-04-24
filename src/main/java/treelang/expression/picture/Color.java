@@ -1,12 +1,12 @@
-package langtest.expression.picture;
+package treelang.expression.picture;
 
 import java.util.ArrayList;
 
-import langtest.expression.Expression;
-import langtest.expression.TypeException;
-import langtest.expression.math.MathException;
-import langtest.expression.math.Number;
-import langtest.expression.math.MathExpression;
+import treelang.expression.Expression;
+import treelang.expression.TypeException;
+import treelang.expression.math.MathException;
+import treelang.expression.math.Number;
+import treelang.expression.math.MathExpression;
 import processing.core.PApplet;
 
 public class Color extends Picture {

@@ -1,6 +1,6 @@
-package langtest.expression.math;
+package treelang.expression.math;
 
-import langtest.expression.Expression;
+import treelang.expression.Expression;
 
 public abstract class MathExpression extends Expression {
 

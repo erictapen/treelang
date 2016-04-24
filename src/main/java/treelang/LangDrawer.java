@@ -1,15 +1,15 @@
-package langtest;
+package treelang;
 
 import java.util.ArrayList;
 
-import langtest.expression.*;
-import langtest.expression.math.MathBinding;
-import langtest.expression.math.Multiply;
-import langtest.expression.math.Number;
-import langtest.expression.math.Plus;
-import langtest.expression.picture.Color;
-import langtest.expression.picture.Point;
-import langtest.expression.picture.Rectangle;
+import treelang.expression.*;
+import treelang.expression.math.MathBinding;
+import treelang.expression.math.Multiply;
+import treelang.expression.math.Number;
+import treelang.expression.math.Plus;
+import treelang.expression.picture.Color;
+import treelang.expression.picture.Point;
+import treelang.expression.picture.Rectangle;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")

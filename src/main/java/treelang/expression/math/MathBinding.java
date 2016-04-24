@@ -1,12 +1,14 @@
-package langtest.expression;
+package treelang.expression.math;
 
 import java.util.ArrayList;
 
-public class Binding extends Expression {
+import treelang.expression.Expression;
+
+public class MathBinding extends MathExpression {
 	private String identifier;
-	private Expression value;
+	private MathExpression value;
 	
-	public Binding(String identifier, Expression value) {
+	public MathBinding(String identifier, MathExpression value) {
 		super();
 		this.identifier = identifier;
 		this.value = value;
@@ -18,14 +20,22 @@ public class Binding extends Expression {
 		return res;
 	}
 
+	public int eval() throws MathException {
+		return value.eval();
+	}
+
 	public String getIdentifier() {
 		return identifier;
 	}
 
-	public Expression getValue() {
+	public MathExpression getValue() {
 		return value;
 	}
 	
+	public void setValue(MathExpression value) {
+		this.value = value;
+	}
+
 	public boolean isValid() {
 		return this.value!=null && this.value.isValid();
 	}
@@ -36,15 +46,12 @@ public class Binding extends Expression {
 
 	@Override
 	public String toString() {
+		if(value == null) return this.identifier;
 		String res = "define " + this.identifier + "\n";
 		for(String x : this.value.toString().split("\n")) {
 			res += "\t" + x + "\n";
 		}
 		return res;
-	}
-	
-	public void mutate() {
-		
 	}
 	
 	

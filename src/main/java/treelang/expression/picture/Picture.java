@@ -1,9 +1,9 @@
-package langtest.expression.picture;
+package treelang.expression.picture;
 
 import java.util.ArrayList;
 
-import langtest.expression.Expression;
-import langtest.expression.TypeException;
+import treelang.expression.Expression;
+import treelang.expression.TypeException;
 import processing.core.PApplet;
 
 public class Picture extends Expression {

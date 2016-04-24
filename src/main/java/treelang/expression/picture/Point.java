@@ -1,12 +1,12 @@
-package langtest.expression.picture;
+package treelang.expression.picture;
 
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import langtest.expression.Expression;
-import langtest.expression.TypeException;
-import langtest.expression.math.MathException;
-import langtest.expression.math.MathExpression;
+import treelang.expression.Expression;
+import treelang.expression.TypeException;
+import treelang.expression.math.MathException;
+import treelang.expression.math.MathExpression;
 
 public class Point extends Picture{
 	private MathExpression x;

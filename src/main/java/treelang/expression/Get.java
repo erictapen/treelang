@@ -1,10 +1,10 @@
-package langtest.expression;
+package treelang.expression;
 
 import java.util.ArrayList;
 
-import langtest.expression.math.MathExpression;
-import langtest.expression.math.Number;
-import langtest.expression.math.Plus;
+import treelang.expression.math.MathExpression;
+import treelang.expression.math.Number;
+import treelang.expression.math.Plus;
 
 public class Get extends Expression {
 	private MathExpression index;

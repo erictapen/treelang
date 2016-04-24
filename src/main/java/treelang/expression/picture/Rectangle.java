@@ -1,10 +1,10 @@
-package langtest.expression.picture;
+package treelang.expression.picture;
 
 import java.util.ArrayList;
 
-import langtest.expression.Expression;
-import langtest.expression.TypeException;
-import langtest.expression.math.MathException;
+import treelang.expression.Expression;
+import treelang.expression.TypeException;
+import treelang.expression.math.MathException;
 import processing.core.PApplet;
 
 public class Rectangle extends Picture {

@@ -1,4 +1,4 @@
-package langtest.expression;
+package treelang.expression;
 
 public class TypeException extends Exception {
 	private Expression expected;

@@ -1,4 +1,4 @@
-package langtest.expression;
+package treelang.expression;
 
 import java.util.ArrayList;
 

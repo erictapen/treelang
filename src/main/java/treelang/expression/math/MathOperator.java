@@ -1,8 +1,8 @@
-package langtest.expression.math;
+package treelang.expression.math;
 
 import java.util.ArrayList;
 
-import langtest.expression.Expression;
+import treelang.expression.Expression;
 
 public abstract class MathOperator extends MathExpression {
 	protected MathExpression op1;

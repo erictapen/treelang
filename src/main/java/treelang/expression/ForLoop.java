@@ -1,13 +1,13 @@
-package langtest.expression;
+package treelang.expression;
 
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import langtest.expression.math.MathBinding;
-import langtest.expression.math.MathException;
-import langtest.expression.math.MathExpression;
-import langtest.expression.math.Number;
-import langtest.expression.math.Plus;
+import treelang.expression.math.MathBinding;
+import treelang.expression.math.MathException;
+import treelang.expression.math.MathExpression;
+import treelang.expression.math.Number;
+import treelang.expression.math.Plus;
 
 public class ForLoop extends Expression {
 	private MathBinding iterator;
