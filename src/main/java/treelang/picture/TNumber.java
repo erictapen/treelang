@@ -2,7 +2,7 @@ package treelang.picture;
 
 import processing.core.PApplet;
 
-public class Number implements Picture {
+public class TNumber implements TPicture {
 	
 	private int value;
 
@@ -10,7 +10,7 @@ public class Number implements Picture {
 		return this.value;
 	}
 	
-	public Number(int value) {
+	public TNumber(int value) {
 		super();
 		this.value = value;
 	}
@@ -24,12 +24,12 @@ public class Number implements Picture {
 	}
 
 	@Override
-	public Number getNumber() {
+	public TNumber getNumber() {
 		return this;
 	}
 
 	@Override
-	public Point getPoint() {
+	public TPoint getPoint() {
 		// TODO Auto-generated method stub
 		return null;
 	}

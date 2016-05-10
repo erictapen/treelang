@@ -1,13 +1,13 @@
 package treelang;
 
-import treelang.picture.Line;
-import treelang.picture.Picture;
+import treelang.picture.TLine;
+import treelang.picture.TPicture;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")
 public class LangDrawer extends  PApplet {
 	
-	private Picture root;
+	private TPicture root;
 	
 	public void setup() {
 		super.setup();
@@ -15,9 +15,9 @@ public class LangDrawer extends  PApplet {
 		background(0);
 		fill(255, 255, 255);
 		
-		root = new treelang.picture.Point(
-				new treelang.picture.Number(256),
-				new treelang.picture.Number(256));
+		root = new treelang.picture.TPoint(
+				new treelang.picture.TNumber(256),
+				new treelang.picture.TNumber(256));
 		
 //		root = 	new Line(
 //					new treelang.picture.Point(

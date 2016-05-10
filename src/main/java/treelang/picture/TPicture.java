@@ -2,11 +2,11 @@ package treelang.picture;
 
 import processing.core.PApplet;
 
-public interface Picture {
+public interface TPicture {
 	
-	public Number getNumber();
+	public TNumber getNumber();
 	
-	public Point getPoint();
+	public TPoint getPoint();
 	
 	public void draw(PApplet p);
 }

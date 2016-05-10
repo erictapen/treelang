@@ -2,30 +2,30 @@ package treelang.picture;
 
 import processing.core.PApplet;
 
-public class Point implements Picture {
+public class TPoint implements TPicture {
 	
-	private Picture x;
-	private Picture y;
+	private TPicture x;
+	private TPicture y;
 
-	public Picture getX() {
+	public TPicture getX() {
 		return x;
 	}
 
-	public Picture getY() {
+	public TPicture getY() {
 		return y;
 	}
 
-	public Point(Picture x, Picture y) {
+	public TPoint(TPicture x, TPicture y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
 
-	public Number getNumber() {
+	public TNumber getNumber() {
 		return this.x.getNumber();
 	}
 
-	public Point getPoint() {
+	public TPoint getPoint() {
 		return this;
 	}
 

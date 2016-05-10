@@ -2,32 +2,32 @@ package treelang.picture;
 
 import processing.core.PApplet;
 
-public class Line implements Picture{
-	public Picture start;
-	public Picture end;
+public class TLine implements TPicture{
+	public TPicture start;
+	public TPicture end;
 	
-	public Picture getStart() {
+	public TPicture getStart() {
 		return start;
 	}
 
-	public Picture getEnd() {
+	public TPicture getEnd() {
 		return end;
 	}
 
-	public Line(Picture start, Picture end) {
+	public TLine(TPicture start, TPicture end) {
 		super();
 		this.start = start;
 		this.end = end;
 	}
 
 	@Override
-	public Number getNumber() {
+	public TNumber getNumber() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Point getPoint() {
+	public TPoint getPoint() {
 		// TODO Auto-generated method stub
 		return null;
 	}
