@@ -1,15 +1,44 @@
 Line
 	Point
-		255
-		255
+		200
+		200
 	Point
-		265
-		265
+		200
+		300
 Line
 	Point
-		275
-		255
+		200
+		200
 	Point
-		265
-		265
+		300
+		200
+Line
+	Point
+		300
+		300
+	Point
+		300
+		200
+Line
+	Point
+		300
+		300
+	Point
+		200
+		300
+
+Line
+	Point
+		200
+		200
+	Point
+		300
+		300
+Line
+	Point
+		200
+		300
+	Point
+		300
+		200
 

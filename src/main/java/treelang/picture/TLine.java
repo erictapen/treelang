@@ -1,7 +1,5 @@
 package treelang.picture;
 
-import java.util.ArrayList;
-
 import processing.core.PApplet;
 
 public class TLine implements TPicture{
@@ -20,10 +18,6 @@ public class TLine implements TPicture{
 		super();
 		this.start = start;
 		this.end = end;
-	}
-
-	public TLine(ArrayList<TPicture> picChilds) {
-		
 	}
 
 	@Override
