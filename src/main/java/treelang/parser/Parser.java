@@ -16,19 +16,21 @@ public class Parser {
 	
 	
 	
-	public TPicture parse(String infile) {
+	public TPicture parse(String infile) throws SyntaxErrorException {
 		//turn every line into a PNode
-		int level = 0;
-		PNode cursor = new PNode("Picture");
 		ArrayList<PNode> cursorList = new ArrayList<PNode>();
+		cursorList.add(new PNode("List"));
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(infile))) {
 			String line;
-			int i=0;
 			while ((line = br.readLine()) != null) {
+				if(line.trim().isEmpty()) continue;
+				for(PNode x : cursorList) System.out.println(x);
 				int lvl = determineLevel(line);
-				cursor.addChild(new PNode());
-				i++;
+				PNode temp = new PNode(line);
+				while(cursorList.size() <= lvl) cursorList.add(null);
+				cursorList.set(lvl, temp);
+				if(cursorList.get(lvl-1) != null) cursorList.get(lvl-1).addChild(temp);
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("File \"" + infile + "\" not found. Abort.");
@@ -39,12 +41,16 @@ public class Parser {
 			e.printStackTrace();
 			return null;
 		}
-		return null;
+		System.out.println(cursorList.get(0));
+		return cursorList.get(0).getTPic();
 	}
 
 	private int determineLevel(String line) {
-		int res = 0;
-		while(line.startsWith("/t")) res++;
+		int res = 1;
+		while(line.startsWith("\t")) {
+			line = line.substring(1);
+			res++;
+		}
 		return res;
 	}
 }
