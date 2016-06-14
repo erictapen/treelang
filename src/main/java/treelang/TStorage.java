@@ -17,4 +17,16 @@ public class TStorage extends HashMap<Integer, TPicture> {
 			instance = new TStorage();
 		return instance;
 	}
+
+	@Override
+	public String toString() {
+		String res = "TStorage:\n";
+		for(Entry<Integer, TPicture> x : this.entrySet()) {
+			res += x.getKey() + " ==\n";
+			res += x.getValue() + "\n";
+		}
+		return res;
+	}
+	
+	
 }

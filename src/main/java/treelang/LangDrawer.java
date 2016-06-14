@@ -28,7 +28,7 @@ public class LangDrawer extends  PApplet {
 			e.printStackTrace();
 		}
 		System.out.println(root);
-		System.out.println(root.hashCode());
+		System.out.println(TStorage.getInstance());
 	}
 	
 	
