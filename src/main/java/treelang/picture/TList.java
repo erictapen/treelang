@@ -3,13 +3,18 @@ package treelang.picture;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import treelang.TStorage;
 
 public class TList implements TPicture {
 
-	private ArrayList<TPicture> children = new ArrayList<TPicture>();
+	private ArrayList<Integer> children = new ArrayList<Integer>();
 
 	public TList(ArrayList<TPicture> picChilds) {
-		this.children = picChilds;
+		for (TPicture x : picChilds) {
+			Integer hash = new Integer(x.hashCode());
+			this.children.add(hash);
+			TStorage.getInstance().put(hash, x);
+		}
 	}
 
 	@Override
@@ -24,15 +29,15 @@ public class TList implements TPicture {
 
 	@Override
 	public void draw(PApplet p) {
-		for (TPicture x : this.children)
-			x.draw(p);
+		for (Integer x : this.children)
+			TStorage.getInstance().get(x).draw(p);
 	}
 
 	@Override
 	public String toString() {
 		String res = "List";
-		for (TPicture x : children)
-			res += "\n\t" + x.toString().replaceAll("\n", "\n\t");
+		for (Integer x : children)
+			res += "\n\t" + TStorage.getInstance().get(x).toString().replaceAll("\n", "\n\t");
 		return res;
 	}
 
