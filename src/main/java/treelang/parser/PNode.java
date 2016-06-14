@@ -1,12 +1,11 @@
 package treelang.parser;
 
 import java.util.ArrayList;
-
-import treelang.picture.TLine;
 import treelang.picture.TList;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
 import treelang.picture.TPoint;
+import treelang.picture.TTranslate;
 
 public class PNode {
 	private String caption;
@@ -38,12 +37,12 @@ public class PNode {
 		switch(this.caption) {
 			case "List":
 				return new TList(picChilds);
-			case "Line":
-				if(picChilds.size()!=2) throw new SyntaxErrorException();
-				return new TLine(picChilds.get(0), picChilds.get(1));
 			case "Point":
-				if(picChilds.size()!=2) throw new SyntaxErrorException();
-				return new TPoint(picChilds.get(0), picChilds.get(1));
+				if(picChilds.size()!=0) throw new SyntaxErrorException();
+				return new TPoint();
+			case "Translate":
+				if(picChilds.size()!=3) throw new SyntaxErrorException();
+				return new TTranslate(picChilds.get(0), picChilds.get(1), picChilds.get(2));
 			default:
 				return new TNumber(Integer.decode(caption));
 		}

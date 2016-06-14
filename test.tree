@@ -1,44 +1,4 @@
-Line
+Translate
+	24
+	10
 	Point
-		200
-		200
-	Point
-		200
-		300
-Line
-	Point
-		200
-		200
-	Point
-		300
-		200
-Line
-	Point
-		300
-		300
-	Point
-		300
-		200
-Line
-	Point
-		300
-		300
-	Point
-		200
-		300
-
-Line
-	Point
-		200
-		200
-	Point
-		300
-		300
-Line
-	Point
-		200
-		300
-	Point
-		300
-		200
-

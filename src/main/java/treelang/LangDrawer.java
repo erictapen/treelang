@@ -2,10 +2,8 @@ package treelang;
 
 import treelang.parser.Parser;
 import treelang.parser.SyntaxErrorException;
-import treelang.picture.TLine;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
-import treelang.picture.TPoint;
 import processing.core.PApplet;
 
 @SuppressWarnings("serial")
@@ -29,20 +27,8 @@ public class LangDrawer extends  PApplet {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
 		}
-		
-		
-//		root = new treelang.picture.TPoint(
-//				new treelang.picture.TNumber(256),
-//				new treelang.picture.TNumber(256));
-		
-//		root = 	new TLine(
-//					new TPoint(
-//							new TNumber(256),
-//							new TNumber(256)),
-//					new TPoint(
-//							new TNumber(266),
-//							new TNumber(266)));
 		System.out.println(root);
+		System.out.println(root.hashCode());
 	}
 	
 	

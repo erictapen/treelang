@@ -7,7 +7,7 @@ import processing.core.PApplet;
 public class TList implements TPicture {
 
 	private ArrayList<TPicture> children = new ArrayList<TPicture>();
-	
+
 	public TList(ArrayList<TPicture> picChilds) {
 		this.children = picChilds;
 	}
@@ -24,7 +24,16 @@ public class TList implements TPicture {
 
 	@Override
 	public void draw(PApplet p) {
-		for(TPicture x : this.children) x.draw(p);
+		for (TPicture x : this.children)
+			x.draw(p);
+	}
+
+	@Override
+	public String toString() {
+		String res = "List";
+		for (TPicture x : children)
+			res += "\n\t" + x.toString().replaceAll("\n", "\n\t");
+		return res;
 	}
 
 }

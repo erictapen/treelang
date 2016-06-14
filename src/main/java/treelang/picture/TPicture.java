@@ -9,4 +9,5 @@ public interface TPicture {
 	public TPoint getPoint();
 	
 	public void draw(PApplet p);
+	
 }

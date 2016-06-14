@@ -3,26 +3,13 @@ package treelang.picture;
 import processing.core.PApplet;
 
 public class TPoint implements TPicture {
-	
-	private TPicture x;
-	private TPicture y;
 
-	public TPicture getX() {
-		return x;
-	}
-
-	public TPicture getY() {
-		return y;
-	}
-
-	public TPoint(TPicture x, TPicture y) {
+	public TPoint() {
 		super();
-		this.x = x;
-		this.y = y;
 	}
 
 	public TNumber getNumber() {
-		return this.x.getNumber();
+		return new TNumber(0);
 	}
 
 	public TPoint getPoint() {
@@ -31,9 +18,14 @@ public class TPoint implements TPicture {
 
 	@Override
 	public void draw(PApplet p) {
-		p.stroke(153);
-		p.point(x.getNumber().getValue(),
-				y.getNumber().getValue());
+		p.stroke(255);
+		p.point(p.width / 2, p.height / 2);
 	}
 
+	@Override
+	public String toString() {
+		return "Point";
+	}
+	
+	
 }
