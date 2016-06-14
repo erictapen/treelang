@@ -30,9 +30,11 @@ public class TTranslate implements TPicture {
 	@Override
 	public void draw(PApplet p) {
 		if (pic.getClass() == TPoint.class) {
+			p.pushMatrix();
 			p.translate(num1.getNumber().getValue(), num2.getNumber().getValue());
 			pic.draw(p);
 		}
+		p.popMatrix();
 	}
 
 	@Override
