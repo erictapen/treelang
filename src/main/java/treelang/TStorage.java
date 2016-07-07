@@ -5,7 +5,7 @@ import java.util.HashMap;
 import treelang.picture.TPicture;
 
 /**
- * Efficient storage for treelang nodes. Relies on good hash function.
+ * Efficient storage for treelang nodes. Relies on good hash function.1
  * 
  * @author justin
  *
