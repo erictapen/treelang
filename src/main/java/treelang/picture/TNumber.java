@@ -33,13 +33,7 @@ public class TNumber implements TPicture {
 	public TNumber getNumber() {
 		return this;
 	}
-
-	@Override
-	public TPoint getPoint() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public String toString() {
 		return (new Integer(value)).toString();

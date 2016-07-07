@@ -12,8 +12,6 @@ public interface TPicture {
 
 	public TNumber getNumber();
 
-	public TPoint getPoint();
-
 	public void draw(PApplet p);
 
 	@Override

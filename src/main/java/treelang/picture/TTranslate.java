@@ -32,12 +32,6 @@ public class TTranslate implements TPicture {
 		return null;
 	}
 
-	@Override
-	public TPoint getPoint() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	private TPicture getNum1() {
 		return TStorage.getInstance().get(num1);
 	}

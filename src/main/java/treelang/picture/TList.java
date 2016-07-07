@@ -28,12 +28,7 @@ public class TList implements TPicture {
 	public TNumber getNumber() {
 		return new TNumber(this.children.size());
 	}
-
-	@Override
-	public TPoint getPoint() {
-		return this.getNumber().getPoint();
-	}
-
+	
 	@Override
 	public void draw(PApplet p) {
 		for (Integer x : this.children)
