@@ -3,6 +3,13 @@ package treelang.picture;
 import processing.core.PApplet;
 import treelang.TStorage;
 
+/**
+ * A treelang node of type Number -> Number -> Picture -> Picture which moves a
+ * picture along x and y coordinates.
+ * 
+ * @author justin
+ *
+ */
 public class TTranslate implements TPicture {
 
 	Integer num1;

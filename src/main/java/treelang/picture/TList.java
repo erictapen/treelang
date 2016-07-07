@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import treelang.TStorage;
 
+/**
+ * A treelang node of type Picture, which consists of multiple Pictures. These
+ * will be drawn in a defined order.
+ * 
+ * @author justin
+ *
+ */
 public class TList implements TPicture {
 
 	private ArrayList<Integer> children = new ArrayList<Integer>();
