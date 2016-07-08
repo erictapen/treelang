@@ -2,8 +2,6 @@ package treelang.parser;
 
 import java.util.ArrayList;
 
-import org.omg.PortableServer.ThreadPolicyOperations;
-
 import treelang.picture.TIdentifier;
 import treelang.picture.TLambda;
 import treelang.picture.TList;
@@ -42,6 +40,12 @@ public class PNode {
 		this.children.add(child);
 	}
 
+	/**
+	 * Turns an PNode into a TPicture
+	 * 
+	 * @return
+	 * @throws SyntaxErrorException in case of wrong amount of arguments
+	 */
 	public TPicture getTPic() throws SyntaxErrorException {
 		ArrayList<TPicture> picChilds = new ArrayList<TPicture>();
 		for (PNode x : this.children)
