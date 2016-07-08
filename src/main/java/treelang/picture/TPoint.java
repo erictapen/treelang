@@ -19,8 +19,9 @@ public class TPoint implements TPicture {
 		return new TNumber(0);
 	}
 
-	public TPoint getPoint() {
-		return this;
+	@Override
+	public Integer unLambda(String identifier, Integer expression) {
+		return this.hashCode();
 	}
 
 	@Override

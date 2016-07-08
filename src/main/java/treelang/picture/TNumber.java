@@ -21,6 +21,16 @@ public class TNumber implements TPicture {
 		this.value = value;
 	}
 
+	@Override
+	public TNumber getNumber() {
+		return this;
+	}
+
+	@Override
+	public Integer unLambda(String identifier, Integer expression) {
+		return this.hashCode();
+	}
+
 	public void draw(PApplet p) {
 		p.loadPixels();
 		for (int i = 0; i < this.value; i++) {
@@ -29,11 +39,6 @@ public class TNumber implements TPicture {
 		p.updatePixels();
 	}
 
-	@Override
-	public TNumber getNumber() {
-		return this;
-	}
-	
 	@Override
 	public String toString() {
 		return (new Integer(value)).toString();

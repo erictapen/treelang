@@ -1,13 +1,10 @@
 package treelang.picture;
 
-import java.util.ArrayList;
-
 import processing.core.PApplet;
 import treelang.TStorage;
 
 public class TLambda implements TPicture {
 	private final String ident;
-	private final ArrayList<Integer> varOccurences = new ArrayList<Integer>();
 
 	private final Integer var;
 	private final Integer expr;
@@ -18,8 +15,6 @@ public class TLambda implements TPicture {
 		TStorage.getInstance().put(this.var, var);
 		this.expr = new Integer(expr.hashCode());
 		TStorage.getInstance().put(this.expr, expr);
-		// find occurences of identifier
-		
 	}
 
 	public Integer getVar() {
@@ -33,6 +28,25 @@ public class TLambda implements TPicture {
 	@Override
 	public TNumber getNumber() {
 		return new TNumber(0);
+	}
+
+	@Override
+	public Integer unLambda(String identifier, Integer expression) {
+		boolean needsUnLambda = false;
+		Integer newVar = TStorage.getInstance().get(this.var).unLambda(identifier, expression);
+		if (newVar != this.var)
+			needsUnLambda = true;
+		Integer newExpr = TStorage.getInstance().get(this.expr).unLambda(identifier, expression);
+		if (newExpr != this.expr)
+			needsUnLambda = true;
+		if (needsUnLambda) {
+			TPicture newNode = new TLambda(this.ident, TStorage.getInstance().get(newVar),
+					TStorage.getInstance().get(newExpr));
+			Integer newHash = newNode.hashCode();
+			TStorage.getInstance().put(newHash, newNode);
+			return newHash;
+		}
+		return this.hashCode();
 	}
 
 	@Override

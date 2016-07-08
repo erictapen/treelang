@@ -45,6 +45,28 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
+	public Integer unLambda(String identifier, Integer expression) {
+		boolean needsUnLambda = false;
+		Integer newNum1 = TStorage.getInstance().get(this.num1).unLambda(identifier, expression);
+		if (newNum1 != this.num1)
+			needsUnLambda = true;
+		Integer newNum2 = TStorage.getInstance().get(this.num2).unLambda(identifier, expression);
+		if (newNum2 != this.num2)
+			needsUnLambda = true;
+		Integer newPic = TStorage.getInstance().get(this.pic).unLambda(identifier, expression);
+		if (newPic != this.pic)
+			needsUnLambda = true;
+		if (needsUnLambda) {
+			TPicture newNode = new TTranslate(TStorage.getInstance().get(newNum1), TStorage.getInstance().get(newNum2),
+					TStorage.getInstance().get(newPic));
+			Integer newHash = newNode.hashCode();
+			TStorage.getInstance().put(newHash, newNode);
+			return newHash;
+		}
+		return this.hashCode();
+	}
+
+	@Override
 	public void draw(PApplet p) {
 		if (getPic().getClass() == TPoint.class) {
 			p.pushMatrix();

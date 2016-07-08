@@ -28,7 +28,26 @@ public class TList implements TPicture {
 	public TNumber getNumber() {
 		return new TNumber(this.children.size());
 	}
-	
+
+	@Override
+	public Integer unLambda(String identifier, Integer expression) {
+		boolean needsUnLambda = false;
+		ArrayList<TPicture> newList = new ArrayList<TPicture>();
+		for (Integer x : this.children) {
+			Integer newEl = TStorage.getInstance().get(x).unLambda(identifier, expression);
+			newList.add(TStorage.getInstance().get(newEl));
+			if (x != newEl)
+				needsUnLambda = true;
+		}
+		if (needsUnLambda) {
+			TPicture newNode = new TList(newList);
+			Integer newHash = newNode.hashCode();
+			TStorage.getInstance().put(newHash, newNode);
+			return newHash;
+		}
+		return this.hashCode();
+	}
+
 	@Override
 	public void draw(PApplet p) {
 		for (Integer x : this.children)
