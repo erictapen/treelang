@@ -19,11 +19,11 @@ public class TTranslate implements TPicture {
 	public TTranslate(TPicture num1, TPicture num2, TPicture pic) {
 		super();
 		this.num1 = new Integer(num1.hashCode());
-		TStorage.getInstance().put(this.num1, num1);
+		TStorage.gI().put(this.num1, num1);
 		this.num2 = new Integer(num2.hashCode());
-		TStorage.getInstance().put(this.num2, num2);
+		TStorage.gI().put(this.num2, num2);
 		this.pic = new Integer(pic.hashCode());
-		TStorage.getInstance().put(this.pic, pic);
+		TStorage.gI().put(this.pic, pic);
 	}
 
 	@Override
@@ -33,34 +33,34 @@ public class TTranslate implements TPicture {
 	}
 
 	private TPicture getNum1() {
-		return TStorage.getInstance().get(num1);
+		return TStorage.gI().get(num1);
 	}
 
 	private TPicture getNum2() {
-		return TStorage.getInstance().get(num2);
+		return TStorage.gI().get(num2);
 	}
 
 	private TPicture getPic() {
-		return TStorage.getInstance().get(pic);
+		return TStorage.gI().get(pic);
 	}
 
 	@Override
 	public Integer unLambda(String identifier, Integer expression) {
 		boolean needsUnLambda = false;
-		Integer newNum1 = TStorage.getInstance().get(this.num1).unLambda(identifier, expression);
+		Integer newNum1 = TStorage.gI().get(this.num1).unLambda(identifier, expression);
 		if (newNum1 != this.num1)
 			needsUnLambda = true;
-		Integer newNum2 = TStorage.getInstance().get(this.num2).unLambda(identifier, expression);
+		Integer newNum2 = TStorage.gI().get(this.num2).unLambda(identifier, expression);
 		if (newNum2 != this.num2)
 			needsUnLambda = true;
-		Integer newPic = TStorage.getInstance().get(this.pic).unLambda(identifier, expression);
+		Integer newPic = TStorage.gI().get(this.pic).unLambda(identifier, expression);
 		if (newPic != this.pic)
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TTranslate(TStorage.getInstance().get(newNum1), TStorage.getInstance().get(newNum2),
-					TStorage.getInstance().get(newPic));
+			TPicture newNode = new TTranslate(TStorage.gI().get(newNum1), TStorage.gI().get(newNum2),
+					TStorage.gI().get(newPic));
 			Integer newHash = newNode.hashCode();
-			TStorage.getInstance().put(newHash, newNode);
+			TStorage.gI().put(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();

@@ -18,7 +18,7 @@ public class TStorage extends HashMap<Integer, TPicture> {
 
 	}
 
-	public static TStorage getInstance() {
+	public static TStorage gI() {
 		if (instance == null)
 			instance = new TStorage();
 		return instance;

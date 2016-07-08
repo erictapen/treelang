@@ -12,17 +12,17 @@ public class TLambda implements TPicture {
 	public TLambda(String ident, TPicture var, TPicture expr) {
 		this.ident = ident;
 		this.var = new Integer(var.hashCode());
-		TStorage.getInstance().put(this.var, var);
+		TStorage.gI().put(this.var, var);
 		this.expr = new Integer(expr.hashCode());
-		TStorage.getInstance().put(this.expr, expr);
+		TStorage.gI().put(this.expr, expr);
 	}
 
 	public TPicture getVar() {
-		return TStorage.getInstance().get(var);
+		return TStorage.gI().get(var);
 	}
 
 	public TPicture getExpr() {
-		return TStorage.getInstance().get(expr);
+		return TStorage.gI().get(expr);
 	}
 
 	@Override
@@ -33,17 +33,17 @@ public class TLambda implements TPicture {
 	@Override
 	public Integer unLambda(String identifier, Integer expression) {
 		boolean needsUnLambda = false;
-		Integer newVar = TStorage.getInstance().get(this.var).unLambda(identifier, expression);
+		Integer newVar = TStorage.gI().get(this.var).unLambda(identifier, expression);
 		if (newVar != this.var)
 			needsUnLambda = true;
-		Integer newExpr = TStorage.getInstance().get(this.expr).unLambda(identifier, expression);
+		Integer newExpr = TStorage.gI().get(this.expr).unLambda(identifier, expression);
 		if (newExpr != this.expr)
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TLambda(this.ident, TStorage.getInstance().get(newVar),
-					TStorage.getInstance().get(newExpr));
+			TPicture newNode = new TLambda(this.ident, TStorage.gI().get(newVar),
+					TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
-			TStorage.getInstance().put(newHash, newNode);
+			TStorage.gI().put(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();
@@ -52,7 +52,7 @@ public class TLambda implements TPicture {
 	@Override
 	public void draw(PApplet p) {
 		Integer unfoldedLambda = getExpr().unLambda(ident, var);
-		TStorage.getInstance().get(unfoldedLambda).draw(p);
+		TStorage.gI().get(unfoldedLambda).draw(p);
 	}
 
 	@Override

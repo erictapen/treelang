@@ -20,7 +20,7 @@ public class TList implements TPicture {
 		for (TPicture x : picChilds) {
 			Integer hash = new Integer(x.hashCode());
 			this.children.add(hash);
-			TStorage.getInstance().put(hash, x);
+			TStorage.gI().put(hash, x);
 		}
 	}
 
@@ -34,15 +34,15 @@ public class TList implements TPicture {
 		boolean needsUnLambda = false;
 		ArrayList<TPicture> newList = new ArrayList<TPicture>();
 		for (Integer x : this.children) {
-			Integer newEl = TStorage.getInstance().get(x).unLambda(identifier, expression);
-			newList.add(TStorage.getInstance().get(newEl));
+			Integer newEl = TStorage.gI().get(x).unLambda(identifier, expression);
+			newList.add(TStorage.gI().get(newEl));
 			if (x != newEl)
 				needsUnLambda = true;
 		}
 		if (needsUnLambda) {
 			TPicture newNode = new TList(newList);
 			Integer newHash = newNode.hashCode();
-			TStorage.getInstance().put(newHash, newNode);
+			TStorage.gI().put(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();
@@ -51,14 +51,14 @@ public class TList implements TPicture {
 	@Override
 	public void draw(PApplet p) {
 		for (Integer x : this.children)
-			TStorage.getInstance().get(x).draw(p);
+			TStorage.gI().get(x).draw(p);
 	}
 
 	@Override
 	public String toString() {
 		String res = "List";
 		for (Integer x : children)
-			res += "\n\t" + TStorage.getInstance().get(x).toString().replaceAll("\n", "\n\t");
+			res += "\n\t" + TStorage.gI().get(x).toString().replaceAll("\n", "\n\t");
 		return res;
 	}
 

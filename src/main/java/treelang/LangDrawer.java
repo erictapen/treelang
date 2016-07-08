@@ -34,7 +34,7 @@ public class LangDrawer extends PApplet {
 		}
 		
 		System.out.println(root);
-		System.out.println(TStorage.getInstance());
+		System.out.println(TStorage.gI());
 	}
 
 	public void draw() {
