@@ -6,11 +6,11 @@ import processing.core.PApplet;
 import treelang.TStorage;
 
 public class TLambda implements TPicture {
-	private String ident;
-	private ArrayList<Integer> varOccurences = new ArrayList<Integer>();
+	private final String ident;
+	private final ArrayList<Integer> varOccurences = new ArrayList<Integer>();
 
-	private Integer var;
-	private Integer expr;
+	private final Integer var;
+	private final Integer expr;
 
 	public TLambda(String ident, TPicture var, TPicture expr) {
 		this.ident = ident;

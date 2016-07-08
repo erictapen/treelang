@@ -10,7 +10,7 @@ import processing.core.PApplet;
  */
 public class TNumber implements TPicture {
 
-	private int value;
+	private final int value;
 
 	public int getValue() {
 		return this.value;

@@ -12,9 +12,9 @@ import treelang.TStorage;
  */
 public class TTranslate implements TPicture {
 
-	Integer num1;
-	Integer num2;
-	Integer pic;
+	private final Integer num1;
+	private final Integer num2;
+	private final Integer pic;
 
 	public TTranslate(TPicture num1, TPicture num2, TPicture pic) {
 		super();

@@ -14,7 +14,7 @@ import treelang.TStorage;
  */
 public class TList implements TPicture {
 
-	private ArrayList<Integer> children = new ArrayList<Integer>();
+	private final ArrayList<Integer> children = new ArrayList<Integer>();
 
 	public TList(ArrayList<TPicture> picChilds) {
 		for (TPicture x : picChilds) {

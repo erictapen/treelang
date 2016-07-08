@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class TIdentifier implements TPicture {
 	
-	private String name;
+	private final String name;
 	
 	public TIdentifier(String name) {
 		this.name = name;
