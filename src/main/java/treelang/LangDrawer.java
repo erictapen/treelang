@@ -32,6 +32,7 @@ public class LangDrawer extends PApplet {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
 		}
+		
 		System.out.println(root);
 		System.out.println(TStorage.getInstance());
 	}

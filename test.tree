@@ -1,6 +1,12 @@
 List
+	Lambda
+		x
+		20
+		Translate
+			x
+			x
+			Point
 	Translate
-		5
-		5
+		10
+		10
 		Point
-	Point

@@ -17,12 +17,12 @@ public class TLambda implements TPicture {
 		TStorage.getInstance().put(this.expr, expr);
 	}
 
-	public Integer getVar() {
-		return var;
+	public TPicture getVar() {
+		return TStorage.getInstance().get(var);
 	}
 
-	public Integer getExpr() {
-		return expr;
+	public TPicture getExpr() {
+		return TStorage.getInstance().get(expr);
 	}
 
 	@Override
@@ -51,12 +51,13 @@ public class TLambda implements TPicture {
 
 	@Override
 	public void draw(PApplet p) {
-
+		Integer unfoldedLambda = getExpr().unLambda(ident, var);
+		TStorage.getInstance().get(unfoldedLambda).draw(p);
 	}
 
 	@Override
 	public String toString() {
-		String res = "Translate";
+		String res = "Lambda";
 		res += "\n\t" + ident;
 		res += "\n\t" + getVar().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getExpr().toString().replaceAll("\n", "\n\t");

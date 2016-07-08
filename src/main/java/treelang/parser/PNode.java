@@ -1,6 +1,11 @@
 package treelang.parser;
 
 import java.util.ArrayList;
+
+import org.omg.PortableServer.ThreadPolicyOperations;
+
+import treelang.picture.TIdentifier;
+import treelang.picture.TLambda;
 import treelang.picture.TList;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
@@ -52,8 +57,16 @@ public class PNode {
 			if (picChilds.size() != 3)
 				throw new SyntaxErrorException();
 			return new TTranslate(picChilds.get(0), picChilds.get(1), picChilds.get(2));
+		case "Lambda":
+			if (picChilds.size() != 3)
+				throw new SyntaxErrorException();
+			return new TLambda(this.children.get(0).getCaption(), picChilds.get(1), picChilds.get(2));
 		default:
-			return new TNumber(Integer.decode(caption));
+			try {
+				return new TNumber(Integer.decode(caption));
+			} catch (NumberFormatException e) {
+				return new TIdentifier(this.caption);
+			}
 		}
 	}
 
