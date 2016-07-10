@@ -2,24 +2,15 @@ List
 	Lambda
 		x
 		20
-		List
-			Translate
+		Translate
+			+
+				2
 				x
-				x
-				Point
-			Translate
-				x
-				x
-				Point
-			Translate
-				x
-				x
-				Point
-			Translate
-				x
-				x
-				Point
+			x
+			Point
 	Translate
-		10
+		+
+			10
+			50
 		10
 		Point
