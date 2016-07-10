@@ -5,8 +5,8 @@ import treelang.TStorage;
 
 public abstract class TArithmetic implements TPicture {
 
-	private Integer op1;
-	private Integer op2;
+	private final Integer op1;
+	private final Integer op2;
 
 	public TArithmetic(TPicture op1, TPicture op2) {
 		this.op1 = new Integer(op1.hashCode());
