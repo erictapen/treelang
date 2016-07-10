@@ -2,9 +2,12 @@ package treelang.parser;
 
 import java.util.ArrayList;
 
+import treelang.picture.TDivide;
 import treelang.picture.TIdentifier;
 import treelang.picture.TLambda;
 import treelang.picture.TList;
+import treelang.picture.TMinus;
+import treelang.picture.TMultiply;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
 import treelang.picture.TPlus;
@@ -70,6 +73,18 @@ public class PNode {
 			if(picChilds.size() != 2)
 				throw new SyntaxErrorException();
 			return new TPlus(picChilds.get(0), picChilds.get(1));
+		case "-":
+			if(picChilds.size() != 2)
+				throw new SyntaxErrorException();
+			return new TMinus(picChilds.get(0), picChilds.get(1));
+		case "/":
+			if(picChilds.size() != 2)
+				throw new SyntaxErrorException();
+			return new TDivide(picChilds.get(0), picChilds.get(1));
+		case "*":
+			if(picChilds.size() != 2)
+				throw new SyntaxErrorException();
+			return new TMultiply(picChilds.get(0), picChilds.get(1));
 		default:
 			try {
 				return new TNumber(Integer.decode(caption));
