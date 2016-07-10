@@ -3,6 +3,7 @@ package treelang.parser;
 import java.util.ArrayList;
 
 import treelang.picture.TDivide;
+import treelang.picture.TForLoop;
 import treelang.picture.TIdentifier;
 import treelang.picture.TLambda;
 import treelang.picture.TList;
@@ -69,6 +70,10 @@ public class PNode {
 			if (picChilds.size() != 3)
 				throw new SyntaxErrorException();
 			return new TLambda(this.children.get(0).getCaption(), picChilds.get(1), picChilds.get(2));
+		case "For":
+			if (picChilds.size() != 3)
+				throw new SyntaxErrorException();
+			return new TForLoop(this.children.get(0).getCaption(), picChilds.get(1), picChilds.get(2));
 		case "+":
 			if(picChilds.size() != 2)
 				throw new SyntaxErrorException();
