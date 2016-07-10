@@ -1,26 +1,18 @@
 package treelang.picture;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import treelang.TStorage;
 
-/**
- * treelang representation of a lambda expression. This can be used as an
- * anonymous function and is useful for abstraction. For multiple use of the
- * same function, use another lambda expression and give it the hash of the
- * field expr. This way you can fake function names.
- * 
- * See also TForLoop for another type of abstraction.
- * 
- * @author justin
- *
- */
-public class TLambda implements TPicture {
+public final class TForLoop implements TPicture {
+
 	private final String ident;
 
 	private final Integer var;
 	private final Integer expr;
 
-	public TLambda(String ident, TPicture var, TPicture expr) {
+	public TForLoop(String ident, TPicture var, TPicture expr) {
 		this.ident = ident;
 		this.var = new Integer(var.hashCode());
 		TStorage.gI().put(this.var, var);
@@ -38,8 +30,7 @@ public class TLambda implements TPicture {
 
 	@Override
 	public TNumber getNumber() {
-		Integer unfoldedLambda = getExpr().unLambda(ident, var);
-		return TStorage.gI().get(unfoldedLambda).getNumber();
+		return new TNumber(0);
 	}
 
 	@Override
@@ -62,13 +53,16 @@ public class TLambda implements TPicture {
 
 	@Override
 	public void draw(PApplet p) {
-		Integer unfoldedLambda = getExpr().unLambda(ident, var);
-		TStorage.gI().get(unfoldedLambda).draw(p);
+		ArrayList<TPicture> newNodes = new ArrayList<TPicture>();
+		int amount = TStorage.gI().get(this.var).getNumber().getValue();
+		for (int i = amount; i >= 0; i--)
+			newNodes.add(new TLambda(ident, new TNumber(i), TStorage.gI().get(expr)));
+		(new TList(newNodes)).draw(p);
 	}
 
 	@Override
 	public String toString() {
-		String res = "Lambda";
+		String res = "For";
 		res += "\n\t" + ident;
 		res += "\n\t" + getVar().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getExpr().toString().replaceAll("\n", "\n\t");
