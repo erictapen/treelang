@@ -2,10 +2,23 @@ List
 	Lambda
 		x
 		20
-		Translate
-			x
-			x
-			Point
+		List
+			Translate
+				x
+				x
+				Point
+			Translate
+				x
+				x
+				Point
+			Translate
+				x
+				x
+				Point
+			Translate
+				x
+				x
+				Point
 	Translate
 		10
 		10
