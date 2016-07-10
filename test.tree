@@ -4,22 +4,44 @@ List
 		20
 		List
 			Translate
-				x
-				x
-				Point
-			Translate
-				x
+				+
+					1
+					x
 				x
 				Point
 			Translate
-				x
+				-
+					-2
+					x
 				x
 				Point
 			Translate
+				+
+					3
+					x
 				x
+				Point
+			Translate
+				+
+					4
+					x
+				x
+				Point
+			Translate
+				+
+					5
+					x
+				x
+				Point
+			Translate
+				+
+					6
+					x
 				x
 				Point
 	Translate
-		10
+		+
+			10
+			50
 		10
 		Point

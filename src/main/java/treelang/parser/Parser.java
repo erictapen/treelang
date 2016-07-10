@@ -26,8 +26,6 @@ public class Parser {
 			while ((line = br.readLine()) != null) {
 				if (line.trim().isEmpty())
 					continue;
-				for (PNode x : cursorList)
-					System.out.println(x);
 				int lvl = determineLevel(line);
 				PNode temp = new PNode(line);
 				while (cursorList.size() <= lvl)
@@ -45,7 +43,6 @@ public class Parser {
 			e.printStackTrace();
 			return null;
 		}
-		System.out.println(cursorList.get(0));
 		return cursorList.get(0).getTPic();
 	}
 

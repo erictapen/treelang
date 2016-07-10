@@ -7,6 +7,7 @@ import treelang.picture.TLambda;
 import treelang.picture.TList;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
+import treelang.picture.TPlus;
 import treelang.picture.TPoint;
 import treelang.picture.TTranslate;
 
@@ -65,6 +66,10 @@ public class PNode {
 			if (picChilds.size() != 3)
 				throw new SyntaxErrorException();
 			return new TLambda(this.children.get(0).getCaption(), picChilds.get(1), picChilds.get(2));
+		case "+":
+			if(picChilds.size() != 2)
+				throw new SyntaxErrorException();
+			return new TPlus(picChilds.get(0), picChilds.get(1));
 		default:
 			try {
 				return new TNumber(Integer.decode(caption));
