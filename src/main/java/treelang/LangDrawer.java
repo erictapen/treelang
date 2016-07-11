@@ -6,20 +6,25 @@ import treelang.picture.TNumber;
 import treelang.picture.TPicture;
 import processing.core.PApplet;
 
+/**
+ * Do everything
+ * 
+ * @author justin
+ *
+ */
 @SuppressWarnings("serial")
-public class LangDrawer extends  PApplet {
-	
+public class LangDrawer extends PApplet {
+
 	private TPicture root;
-	
+
 	public void setup() {
 		super.setup();
 		size(512, 512);
 		background(0);
 		fill(255, 255, 255);
-		
+
 		root = new TNumber(1000);
 
-		
 		Parser p = new Parser();
 		try {
 			root = p.parse("test.tree");
@@ -27,14 +32,13 @@ public class LangDrawer extends  PApplet {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
 		}
+		this.pushMatrix();
 		System.out.println(root);
-		System.out.println(root.hashCode());
+		System.out.println(TStorage.gI());
 	}
-	
-	
+
 	public void draw() {
 		clear();
 		root.draw(this);
-		//System.out.println(root);
 	}
 }

@@ -3,13 +3,25 @@ package treelang.picture;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import treelang.TStorage;
 
+/**
+ * A treelang node of type Picture, which consists of multiple Pictures. These
+ * will be drawn in a defined order.
+ * 
+ * @author justin
+ *
+ */
 public class TList implements TPicture {
 
-	private ArrayList<TPicture> children = new ArrayList<TPicture>();
+	private final ArrayList<Integer> children = new ArrayList<Integer>();
 
 	public TList(ArrayList<TPicture> picChilds) {
-		this.children = picChilds;
+		for (TPicture x : picChilds) {
+			Integer hash = new Integer(x.hashCode());
+			this.children.add(hash);
+			TStorage.gI().put(hash, x);
+		}
 	}
 
 	@Override
@@ -18,21 +30,35 @@ public class TList implements TPicture {
 	}
 
 	@Override
-	public TPoint getPoint() {
-		return this.getNumber().getPoint();
+	public Integer unLambda(String identifier, Integer expression) {
+		boolean needsUnLambda = false;
+		ArrayList<TPicture> newList = new ArrayList<TPicture>();
+		for (Integer x : this.children) {
+			Integer newEl = TStorage.gI().get(x).unLambda(identifier, expression);
+			newList.add(TStorage.gI().get(newEl));
+			if (x != newEl)
+				needsUnLambda = true;
+		}
+		if (needsUnLambda) {
+			TPicture newNode = new TList(newList);
+			Integer newHash = newNode.hashCode();
+			TStorage.gI().put(newHash, newNode);
+			return newHash;
+		}
+		return this.hashCode();
 	}
 
 	@Override
 	public void draw(PApplet p) {
-		for (TPicture x : this.children)
-			x.draw(p);
+		for (Integer x : this.children)
+			TStorage.gI().get(x).draw(p);
 	}
 
 	@Override
 	public String toString() {
 		String res = "List";
-		for (TPicture x : children)
-			res += "\n\t" + x.toString().replaceAll("\n", "\n\t");
+		for (Integer x : children)
+			res += "\n\t" + TStorage.gI().get(x).toString().replaceAll("\n", "\n\t");
 		return res;
 	}
 

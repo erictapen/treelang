@@ -2,25 +2,23 @@ package treelang.picture;
 
 import processing.core.PApplet;
 
+/**
+ * A basic treelang type which simply holds an Integer. Castable to Picture.
+ * 
+ * @author justin
+ *
+ */
 public class TNumber implements TPicture {
-	
-	private int value;
+
+	private final int value;
 
 	public int getValue() {
 		return this.value;
 	}
-	
+
 	public TNumber(int value) {
 		super();
 		this.value = value;
-	}
-
-	public void draw(PApplet p) {
-		p.loadPixels();
-		for(int i=0; i<this.value; i++) {
-			p.pixels[i] = 0xffffff;
-		}
-		p.updatePixels();
 	}
 
 	@Override
@@ -29,9 +27,16 @@ public class TNumber implements TPicture {
 	}
 
 	@Override
-	public TPoint getPoint() {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer unLambda(String identifier, Integer expression) {
+		return this.hashCode();
+	}
+
+	public void draw(PApplet p) {
+		p.loadPixels();
+		for (int i = 0; i < this.value; i++) {
+			p.pixels[i] = 0xffffff;
+		}
+		p.updatePixels();
 	}
 
 	@Override

@@ -4,6 +4,12 @@ import java.util.HashMap;
 
 import treelang.picture.TPicture;
 
+/**
+ * Efficient storage for treelang nodes. Relies on good hash function.
+ * 
+ * @author justin
+ *
+ */
 @SuppressWarnings("serial")
 public class TStorage extends HashMap<Integer, TPicture> {
 	private static TStorage instance = null;
@@ -12,9 +18,20 @@ public class TStorage extends HashMap<Integer, TPicture> {
 
 	}
 
-	public static TStorage getInstance() {
+	public static TStorage gI() {
 		if (instance == null)
 			instance = new TStorage();
 		return instance;
 	}
+
+	@Override
+	public String toString() {
+		String res = "TStorage:\n";
+		for (Entry<Integer, TPicture> x : this.entrySet()) {
+			res += x.getKey() + " ==\n";
+			res += x.getValue() + "\n";
+		}
+		return res;
+	}
+
 }
