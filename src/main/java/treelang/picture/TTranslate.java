@@ -69,9 +69,9 @@ public class TTranslate implements TPicture {
 	@Override
 	public void draw(PApplet p) {
 		//if (getPic().getClass() == TPoint.class) {
-			p.translate(getNum1().getNumber().getValue(), getNum2().getNumber().getValue());
-			p.pushMatrix();
-			getPic().draw(p);
+		p.pushMatrix();
+		p.translate(getNum1().getNumber().getValue(), getNum2().getNumber().getValue());
+		getPic().draw(p);
 		//}
 		p.popMatrix();
 	}

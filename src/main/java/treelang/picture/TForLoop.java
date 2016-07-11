@@ -28,6 +28,10 @@ public final class TForLoop implements TPicture {
 		return TStorage.gI().get(expr);
 	}
 
+	/* (non-Javadoc)
+	 * At the moment, For only gives meaningful output for Pictures
+	 * @see treelang.picture.TPicture#getNumber()
+	 */
 	@Override
 	public TNumber getNumber() {
 		return new TNumber(0);
@@ -43,7 +47,7 @@ public final class TForLoop implements TPicture {
 		if (newExpr != this.expr)
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TLambda(this.ident, TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
+			TPicture newNode = new TForLoop(this.ident, TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
 			TStorage.gI().put(newHash, newNode);
 			return newHash;
