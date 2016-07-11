@@ -32,7 +32,7 @@ public class LangDrawer extends PApplet {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
 		}
-		
+		this.pushMatrix();
 		System.out.println(root);
 		System.out.println(TStorage.gI());
 	}
@@ -40,6 +40,5 @@ public class LangDrawer extends PApplet {
 	public void draw() {
 		clear();
 		root.draw(this);
-		// System.out.println(root);
 	}
 }
