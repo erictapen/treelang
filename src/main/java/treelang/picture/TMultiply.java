@@ -5,7 +5,7 @@ import treelang.TStorage;
 public final class TMultiply extends TArithmetic implements TPicture {
 
 	public TMultiply(TPicture op1, TPicture op2) {
-		super(op1, op2);
+		super(op1, op2, 505);
 	}
 
 	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {

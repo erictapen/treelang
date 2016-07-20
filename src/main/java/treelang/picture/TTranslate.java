@@ -16,6 +16,9 @@ public class TTranslate implements TPicture {
 	private final Integer num2;
 	private final Integer pic;
 
+	private static int hashInit = 364;
+	private final int hash;
+
 	public TTranslate(TPicture num1, TPicture num2, TPicture pic) {
 		super();
 		this.num1 = new Integer(num1.hashCode());
@@ -24,12 +27,22 @@ public class TTranslate implements TPicture {
 		TStorage.gI().put(this.num2, num2);
 		this.pic = new Integer(pic.hashCode());
 		TStorage.gI().put(this.pic, pic);
+		int hash = hashInit;
+		hash = 37 * hash + this.num1;
+		hash = 37 * hash + this.num2;
+		hash = 37 * hash + this.pic;
+		this.hash = hash;
 	}
 
 	@Override
 	public TNumber getNumber() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int hashCode() {
+		return hash;
 	}
 
 	private TPicture getNum1() {
@@ -68,11 +81,11 @@ public class TTranslate implements TPicture {
 
 	@Override
 	public void draw(PApplet p) {
-		//if (getPic().getClass() == TPoint.class) {
+		// if (getPic().getClass() == TPoint.class) {
 		p.pushMatrix();
 		p.translate(getNum1().getNumber().getValue(), getNum2().getNumber().getValue());
 		getPic().draw(p);
-		//}
+		// }
 		p.popMatrix();
 	}
 

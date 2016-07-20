@@ -8,13 +8,22 @@ public abstract class TArithmetic implements TPicture {
 	private final Integer op1;
 	private final Integer op2;
 
-	public TArithmetic(TPicture op1, TPicture op2) {
+	private final int hash;
+
+	public TArithmetic(TPicture op1, TPicture op2, int hash) {
 		this.op1 = new Integer(op1.hashCode());
 		TStorage.gI().put(this.op1, op1);
 		this.op2 = new Integer(op2.hashCode());
 		TStorage.gI().put(this.op2, op2);
+		hash = 37 * hash + this.op1;
+		hash = 37 * hash + this.op2;
+		this.hash = hash;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return hash;
+	}
 
 	@Override
 	public Integer unLambda(String identifier, Integer expression) {
@@ -33,9 +42,8 @@ public abstract class TArithmetic implements TPicture {
 
 	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void draw(PApplet p) {

@@ -16,17 +16,29 @@ public class TList implements TPicture {
 
 	private final ArrayList<Integer> children = new ArrayList<Integer>();
 
+	private static int hashInit = 911;
+	private final int hash;
+
 	public TList(ArrayList<TPicture> picChilds) {
 		for (TPicture x : picChilds) {
 			Integer hash = new Integer(x.hashCode());
 			this.children.add(hash);
 			TStorage.gI().put(hash, x);
 		}
+		int hash = hashInit;
+		for (Integer x : this.children)
+			hash = 37 * hash + x;
+		this.hash = hash;
 	}
 
 	@Override
 	public TNumber getNumber() {
 		return new TNumber(this.children.size());
+	}
+
+	@Override
+	public int hashCode() {
+		return hash;
 	}
 
 	@Override

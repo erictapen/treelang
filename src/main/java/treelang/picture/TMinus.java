@@ -5,7 +5,7 @@ import treelang.TStorage;
 public final class TMinus extends TArithmetic implements TPicture {
 
 	public TMinus(TPicture op1, TPicture op2) {
-		super(op1, op2);
+		super(op1, op2, 517);
 	}
 
 	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {

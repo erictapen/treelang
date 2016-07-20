@@ -5,7 +5,7 @@ import treelang.TStorage;
 public final class TDivide extends TArithmetic implements TPicture {
 
 	public TDivide(TPicture op1, TPicture op2) {
-		super(op1, op2);
+		super(op1, op2, 945);
 	}
 
 	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {

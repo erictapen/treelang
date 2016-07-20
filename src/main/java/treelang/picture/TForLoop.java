@@ -12,12 +12,20 @@ public final class TForLoop implements TPicture {
 	private final Integer var;
 	private final Integer expr;
 
+	private static int hashInit = 976;
+	private final int hash;
+
 	public TForLoop(String ident, TPicture var, TPicture expr) {
 		this.ident = ident;
 		this.var = new Integer(var.hashCode());
 		TStorage.gI().put(this.var, var);
 		this.expr = new Integer(expr.hashCode());
 		TStorage.gI().put(this.expr, expr);
+		int hash = hashInit;
+		hash = 37 * hash + ident.hashCode();
+		hash = 37 * hash + this.var;
+		hash = 37 * hash + this.expr;
+		this.hash = hash;
 	}
 
 	public TPicture getVar() {
@@ -28,13 +36,20 @@ public final class TForLoop implements TPicture {
 		return TStorage.gI().get(expr);
 	}
 
-	/* (non-Javadoc)
-	 * At the moment, For only gives meaningful output for Pictures
+	/*
+	 * (non-Javadoc) At the moment, For only gives meaningful output for
+	 * Pictures
+	 * 
 	 * @see treelang.picture.TPicture#getNumber()
 	 */
 	@Override
 	public TNumber getNumber() {
 		return new TNumber(0);
+	}
+
+	@Override
+	public int hashCode() {
+		return hash;
 	}
 
 	@Override
