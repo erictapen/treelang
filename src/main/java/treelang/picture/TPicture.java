@@ -12,6 +12,8 @@ public interface TPicture {
 
 	public TNumber getNumber();
 
+	public int hashCode();
+	
 	public Integer unLambda(String identifier, Integer expression);
 
 	public void draw(PApplet p);

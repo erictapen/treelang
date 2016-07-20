@@ -3,9 +3,11 @@ package treelang.picture;
 import treelang.TStorage;
 
 public final class TPlus extends TArithmetic implements TPicture {
+	
+	private static int hashInit = 600;
 
 	public TPlus(TPicture op1, TPicture op2) {
-		super(op1, op2);
+		super(op1, op2, hashInit);
 	}
 
 	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {

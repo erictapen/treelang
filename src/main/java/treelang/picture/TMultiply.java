@@ -4,8 +4,10 @@ import treelang.TStorage;
 
 public final class TMultiply extends TArithmetic implements TPicture {
 
+	private static int hashInit = 505;
+
 	public TMultiply(TPicture op1, TPicture op2) {
-		super(op1, op2);
+		super(op1, op2, hashInit);
 	}
 
 	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {
@@ -16,7 +18,8 @@ public final class TMultiply extends TArithmetic implements TPicture {
 
 	@Override
 	public TNumber getNumber() {
-		return new TNumber(TStorage.gI().get(getOp1()).getNumber().getValue() * TStorage.gI().get(getOp2()).getNumber().getValue());
+		return new TNumber(TStorage.gI().get(getOp1()).getNumber().getValue()
+				* TStorage.gI().get(getOp2()).getNumber().getValue());
 	}
 
 	@Override
