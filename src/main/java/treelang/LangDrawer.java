@@ -2,6 +2,7 @@ package treelang;
 
 import treelang.parser.Parser;
 import treelang.parser.SyntaxErrorException;
+import treelang.picture.TLambda;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
 import processing.core.PApplet;
@@ -16,13 +17,16 @@ import processing.core.PApplet;
 public class LangDrawer extends PApplet {
 
 	private TPicture root;
+	private int time;
 
 	public void setup() {
+		time = 0;
+		
 		super.setup();
 		size(512, 512);
 		background(0);
 		fill(255, 255, 255);
-
+		
 		root = new TNumber(1000);
 
 		Parser p = new Parser();
@@ -39,6 +43,7 @@ public class LangDrawer extends PApplet {
 
 	public void draw() {
 		clear();
-		root.draw(this);
+		time++;
+		(new TLambda("time", new TNumber(time), root)).draw(this);
 	}
 }

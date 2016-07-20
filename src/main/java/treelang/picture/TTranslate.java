@@ -2,6 +2,7 @@ package treelang.picture;
 
 import processing.core.PApplet;
 import treelang.TStorage;
+import treelang.mutate.MRule;
 
 /**
  * A treelang node of type Number -> Number -> Picture -> Picture which moves a
@@ -67,12 +68,35 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
+	public Integer applyRule(MRule r) {
+		boolean createNew = false;
+		Integer newNum1 = TStorage.gI().get(num1).applyRule(r);
+		if (newNum1 != num1)
+			createNew = true;
+		Integer newNum2 = TStorage.gI().get(num2).applyRule(r);
+		if (newNum2 != num2)
+			createNew = true;
+		Integer newPic = TStorage.gI().get(pic).applyRule(r);
+		if (newPic != pic)
+			createNew = true;
+		TPicture newNode;
+		if (createNew) {
+			newNode = r.apply(
+					new TTranslate(TStorage.gI().get(newNum1), TStorage.gI().get(newNum2), TStorage.gI().get(newPic)));
+		} else {
+			newNode = r.apply(this);
+		}
+		TStorage.gI().put(newNode.hashCode(), newNode);
+		return newNode.hashCode();
+	}
+
+	@Override
 	public void draw(PApplet p) {
-		//if (getPic().getClass() == TPoint.class) {
+		// if (getPic().getClass() == TPoint.class) {
 		p.pushMatrix();
 		p.translate(getNum1().getNumber().getValue(), getNum2().getNumber().getValue());
 		getPic().draw(p);
-		//}
+		// }
 		p.popMatrix();
 	}
 
