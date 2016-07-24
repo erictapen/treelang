@@ -1,8 +1,10 @@
 package treelang.picture;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import processing.core.PApplet;
 import treelang.TStorage;
-import treelang.mutate.MRule;
 
 /**
  * A treelang node of type Number -> Number -> Picture -> Picture which moves a
@@ -46,15 +48,15 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public Integer unLambda(String identifier, Integer expression) {
+	public Integer replaceAll(Integer identifier, Integer expression) {
 		boolean needsUnLambda = false;
-		Integer newNum1 = TStorage.gI().get(this.num1).unLambda(identifier, expression);
+		Integer newNum1 = TStorage.gI().get(this.num1).replaceAll(identifier, expression);
 		if (newNum1 != this.num1)
 			needsUnLambda = true;
-		Integer newNum2 = TStorage.gI().get(this.num2).unLambda(identifier, expression);
+		Integer newNum2 = TStorage.gI().get(this.num2).replaceAll(identifier, expression);
 		if (newNum2 != this.num2)
 			needsUnLambda = true;
-		Integer newPic = TStorage.gI().get(this.pic).unLambda(identifier, expression);
+		Integer newPic = TStorage.gI().get(this.pic).replaceAll(identifier, expression);
 		if (newPic != this.pic)
 			needsUnLambda = true;
 		if (needsUnLambda) {
@@ -68,26 +70,15 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public Integer applyRule(MRule r) {
-		boolean createNew = false;
-		Integer newNum1 = TStorage.gI().get(num1).applyRule(r);
-		if (newNum1 != num1)
-			createNew = true;
-		Integer newNum2 = TStorage.gI().get(num2).applyRule(r);
-		if (newNum2 != num2)
-			createNew = true;
-		Integer newPic = TStorage.gI().get(pic).applyRule(r);
-		if (newPic != pic)
-			createNew = true;
-		TPicture newNode;
-		if (createNew) {
-			newNode = r.apply(
-					new TTranslate(TStorage.gI().get(newNum1), TStorage.gI().get(newNum2), TStorage.gI().get(newPic)));
-		} else {
-			newNode = r.apply(this);
-		}
-		TStorage.gI().put(newNode.hashCode(), newNode);
-		return newNode.hashCode();
+	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Stack<Byte>> match(Integer expression) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

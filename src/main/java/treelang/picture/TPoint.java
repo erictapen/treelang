@@ -1,8 +1,9 @@
 package treelang.picture;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import processing.core.PApplet;
-import treelang.TStorage;
-import treelang.mutate.MRule;
 
 /**
  * A treelang node of type Picture which consists solely of a white Pixel in the
@@ -22,15 +23,20 @@ public class TPoint implements TPicture {
 	}
 
 	@Override
-	public Integer unLambda(String identifier, Integer expression) {
+	public Integer replaceAll(Integer identifier, Integer expression) {
 		return this.hashCode();
 	}
 
 	@Override
-	public Integer applyRule(MRule r) {
-		TPicture newPic = r.apply(this);
-		TStorage.gI().put(newPic.hashCode(), newPic);
-		return newPic.hashCode();
+	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Stack<Byte>> match(Integer expression) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

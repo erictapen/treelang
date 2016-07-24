@@ -1,6 +1,7 @@
 package treelang.picture;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import processing.core.PApplet;
 import treelang.TStorage;
@@ -30,11 +31,11 @@ public class TList implements TPicture {
 	}
 
 	@Override
-	public Integer unLambda(String identifier, Integer expression) {
+	public Integer replaceAll(Integer identifier, Integer expression) {
 		boolean needsUnLambda = false;
 		ArrayList<TPicture> newList = new ArrayList<TPicture>();
 		for (Integer x : this.children) {
-			Integer newEl = TStorage.gI().get(x).unLambda(identifier, expression);
+			Integer newEl = TStorage.gI().get(x).replaceAll(identifier, expression);
 			newList.add(TStorage.gI().get(newEl));
 			if (x != newEl)
 				needsUnLambda = true;
@@ -46,6 +47,18 @@ public class TList implements TPicture {
 			return newHash;
 		}
 		return this.hashCode();
+	}
+
+	@Override
+	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
+		//TODO
+		return null;
+	}
+
+	@Override
+	public ArrayList<Stack<Byte>> match(Integer expression) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override

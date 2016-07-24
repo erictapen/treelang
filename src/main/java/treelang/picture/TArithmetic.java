@@ -1,5 +1,8 @@
 package treelang.picture;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import processing.core.PApplet;
 import treelang.TStorage;
 
@@ -14,28 +17,37 @@ public abstract class TArithmetic implements TPicture {
 		this.op2 = new Integer(op2.hashCode());
 		TStorage.gI().put(this.op2, op2);
 	}
-	
 
 	@Override
-	public Integer unLambda(String identifier, Integer expression) {
+	public Integer replaceAll(Integer identifier, Integer expression) {
 		boolean needsUnLambda = false;
-		Integer newOp1 = TStorage.gI().get(this.op1).unLambda(identifier, expression);
+		Integer newOp1 = TStorage.gI().get(this.op1).replaceAll(identifier, expression);
 		if (newOp1 != this.op1)
 			needsUnLambda = true;
-		Integer newOp2 = TStorage.gI().get(this.op2).unLambda(identifier, expression);
+		Integer newOp2 = TStorage.gI().get(this.op2).replaceAll(identifier, expression);
 		if (newOp2 != this.op2)
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			this.unLambdaHelper(newOp1, newOp2);
+			this.replaceAllHelper(newOp1, newOp2);
 		}
 		return this.hashCode();
 	}
 
-	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {
-		// TODO Auto-generated method stub
-		
+	protected void replaceAllHelper(Integer newOp1, Integer newOp2) {
+		System.out.println("Warning! abstract TArithmetic.replaceAllHelper was called, but this must be implemented by child classes!");
 	}
 
+	@Override
+	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Stack<Byte>> match(Integer expression) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public void draw(PApplet p) {
