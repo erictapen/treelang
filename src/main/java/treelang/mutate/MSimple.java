@@ -10,9 +10,9 @@ public class MSimple implements MExpression {
 
 	private final Integer value;
 	
-	public MSimple(TPicture value) {
+	public MSimple(Integer value) {
 		super();
-		this.value = value.hashCode();
+		this.value = value;
 	}
 
 	@Override
@@ -22,8 +22,7 @@ public class MSimple implements MExpression {
 
 	@Override
 	public Integer getValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return value;
 	}
 
 }

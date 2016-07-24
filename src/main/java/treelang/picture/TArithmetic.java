@@ -30,6 +30,8 @@ public abstract class TArithmetic implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
+		if (hash==identifier)
+			return expression;
 		boolean needsUnLambda = false;
 		Integer newOp1 = TStorage.gI().get(this.op1).replaceAll(identifier, expression);
 		if (newOp1 != this.op1)

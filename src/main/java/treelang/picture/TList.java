@@ -31,6 +31,10 @@ public class TList implements TPicture {
 			hash = 37 * hash + x;
 		this.hash = hash;
 	}
+	
+	public int getSize() {
+		return children.size();
+	}
 
 	@Override
 	public TNumber getNumber() {
@@ -44,6 +48,8 @@ public class TList implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
+		if (hash==identifier)
+			return expression;
 		boolean needsUnLambda = false;
 		ArrayList<TPicture> newList = new ArrayList<TPicture>();
 		for (Integer x : this.children) {

@@ -62,6 +62,8 @@ public class TTranslate implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
+		if (hash==identifier)
+			return expression;
 		boolean needsUnLambda = false;
 		Integer newNum1 = TStorage.gI().get(this.num1).replaceAll(identifier, expression);
 		if (newNum1 != this.num1)

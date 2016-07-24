@@ -42,6 +42,8 @@ public class TNumber implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
+		if (hash==identifier)
+			return expression;
 		return this.hashCode();
 	}
 

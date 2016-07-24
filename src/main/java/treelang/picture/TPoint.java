@@ -15,9 +15,11 @@ import processing.core.PApplet;
 public class TPoint implements TPicture {
 
 	private static int hashInit = 173;
+	private static int hash;
 
 	public TPoint() {
 		super();
+		hash = hashInit;
 	}
 
 	public TNumber getNumber() {
@@ -26,11 +28,13 @@ public class TPoint implements TPicture {
 
 	@Override
 	public int hashCode() {
-		return hashInit;
+		return hash;
 	}
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
+		if (hash==identifier)
+			return expression;
 		return this.hashCode();
 	}
 

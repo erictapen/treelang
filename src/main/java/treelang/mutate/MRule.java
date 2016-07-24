@@ -22,9 +22,9 @@ public class MRule {
 		return origin.matches(tpic);
 	}
 	
-	public TPicture apply(TPicture tpic) {
+	public Integer apply(Integer tpic) {
 		if(MSimple.class.equals(origin.getClass()) && MSimple.class.equals(target.getClass())) {
-			return TStorage.gI().get(tpic.replaceAll(origin.getValue(), target.getValue()));
+			return TStorage.gI().get(tpic).replaceAll(origin.getValue(), target.getValue());
 		}
 		return null;
 	}

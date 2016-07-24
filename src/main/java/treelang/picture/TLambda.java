@@ -63,6 +63,8 @@ public class TLambda implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
+		if (hash==identifier)
+			return expression;
 		boolean needsUnLambda = false;
 		Integer newVar = TStorage.gI().get(this.var).replaceAll(identifier, expression);
 		if (newVar != this.var)
