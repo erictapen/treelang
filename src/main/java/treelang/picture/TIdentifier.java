@@ -31,7 +31,7 @@ public class TIdentifier implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (this.name.equals(identifier))
+		if (hash==identifier)
 			return expression;
 		else
 			return this.hashCode();
