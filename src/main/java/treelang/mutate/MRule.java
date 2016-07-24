@@ -1,7 +1,12 @@
 package treelang.mutate;
 
+import treelang.TStorage;
 import treelang.picture.TPicture;
 
+/** Template for every rule; one origin expression and one target. Rules are always invertable
+ * @author justin
+ *
+ */
 public class MRule {
 	
 	private final MExpression origin;
@@ -18,9 +23,10 @@ public class MRule {
 	}
 	
 	public TPicture apply(TPicture tpic) {
-		if(matches(tpic))
-			return null;
-		return tpic;
+		if(MSimple.class.equals(origin.getClass()) && MSimple.class.equals(target.getClass())) {
+			return TStorage.gI().get(tpic.replaceAll(origin.getValue(), target.getValue()));
+		}
+		return null;
 	}
 	
 }

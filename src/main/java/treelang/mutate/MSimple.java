@@ -2,6 +2,10 @@ package treelang.mutate;
 
 import treelang.picture.TPicture;
 
+/** Simple expression for a MRule
+ * @author justin
+ *
+ */
 public class MSimple implements MExpression {
 
 	private final Integer value;
