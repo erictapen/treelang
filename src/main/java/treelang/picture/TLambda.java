@@ -23,12 +23,20 @@ public class TLambda implements TPicture {
 	private final Integer var;
 	private final Integer expr;
 
+	private static int hashInit = 730;
+	private final int hash;
+
 	public TLambda(String ident, TPicture var, TPicture expr) {
 		this.ident = ident;
 		this.var = new Integer(var.hashCode());
 		TStorage.gI().put(this.var, var);
 		this.expr = new Integer(expr.hashCode());
 		TStorage.gI().put(this.expr, expr);
+		int hash = hashInit;
+		hash = 37 * hash + ident.hashCode();
+		hash = 37 * hash + this.var;
+		hash = 37 * hash + this.expr;
+		this.hash = hash;
 	}
 
 	public TPicture getVar() {
@@ -46,6 +54,11 @@ public class TLambda implements TPicture {
 		TStorage.gI().put(identifierHash, identifier);
 		Integer unfoldedLambda = getExpr().replaceAll(identifierHash, var);
 		return TStorage.gI().get(unfoldedLambda).getNumber();
+	}
+
+	@Override
+	public int hashCode() {
+		return hash;
 	}
 
 	@Override

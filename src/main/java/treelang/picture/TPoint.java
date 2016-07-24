@@ -14,12 +14,19 @@ import processing.core.PApplet;
  */
 public class TPoint implements TPicture {
 
+	private static int hashInit = 173;
+
 	public TPoint() {
 		super();
 	}
 
 	public TNumber getNumber() {
 		return new TNumber(0);
+	}
+
+	@Override
+	public int hashCode() {
+		return hashInit;
 	}
 
 	@Override

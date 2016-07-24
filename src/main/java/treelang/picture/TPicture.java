@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import processing.core.PApplet;
-import treelang.mutate.MRule;
 
 /**
  * The type Picture is castable to Number.
@@ -21,6 +20,8 @@ public interface TPicture {
 	Integer replace(Integer origin, Integer target, Stack<Byte> dest);
 
 	ArrayList<Stack<Byte>> match(Integer expression);
+
+	public int hashCode();
 
 	public void draw(PApplet p);
 
