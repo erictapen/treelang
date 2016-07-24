@@ -2,8 +2,8 @@ package treelang;
 
 import treelang.parser.Parser;
 import treelang.parser.SyntaxErrorException;
-import treelang.picture.TNumber;
-import treelang.picture.TPicture;
+import java.io.File;
+
 import processing.core.PApplet;
 
 /**
@@ -15,32 +15,31 @@ import processing.core.PApplet;
 @SuppressWarnings("serial")
 public class LangDrawer extends PApplet {
 
-	private TPicture root;
+	private Integer root;
 
 	public void setup() {
+		
 		
 		super.setup();
 		size(512, 512);
 		background(0);
 		fill(255, 255, 255);
-		
-		root = new TNumber(1000);
 
 		Parser p = new Parser();
 		try {
-			root = p.parse("test.tree");
+			root = p.parse(new File("test.tree"));
 		} catch (SyntaxErrorException e) {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
 		}
 		this.pushMatrix();
-		root.draw(this);	//for testing
+		TStorage.gI().get(root).draw(this);	//for testing
 		System.out.println(root);
 		System.out.println(TStorage.gI());
 	}
 
 	public void draw() {
 		clear();
-		root.draw(this);
+		TStorage.gI().get(root).draw(this);
 	}
 }
