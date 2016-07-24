@@ -38,7 +38,7 @@ public class LangDrawer extends PApplet {
 		
 		Parser p = new Parser();
 		try {
-			root = p.parse(new File("test.tree"));
+			root = p.parse(new File("tree"));
 			TPicture pic1 = new TPoint();
 			TStorage.gI().put(pic1.hashCode(), pic1);
 			expr1 = pic1.hashCode();
