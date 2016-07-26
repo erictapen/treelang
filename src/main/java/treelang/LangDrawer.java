@@ -2,6 +2,7 @@ package treelang;
 
 import treelang.mutate.MRule;
 import treelang.mutate.MSimple;
+import treelang.mutate.Mutator;
 import treelang.parser.Parser;
 import treelang.parser.SyntaxErrorException;
 import treelang.picture.TNumber;
@@ -23,35 +24,37 @@ import processing.core.PApplet;
 public class LangDrawer extends PApplet {
 
 	private Integer root;
-	
-	private MRule myrule = null;
+
+	private Mutator m = new Mutator();
 
 	public void setup() {
-		
+
 		super.setup();
 		size(512, 512);
 		background(0);
 		fill(255, 255, 255);
 
-		Integer expr1 = null;
-		Integer expr2 = null;
-		
+		TPicture pic1 = new TPoint();
+		TStorage.gI().put(pic1.hashCode(), pic1);
+		Integer point = pic1.hashCode();
+		TPicture pic2 = new TTranslate(new TNumber(5), new TNumber(5), new TPoint());
+		TStorage.gI().put(pic2.hashCode(), pic2);
+		Integer movedPoint = pic2.hashCode();
+		TPicture pic3 = new TTranslate(new TNumber(-5), new TNumber(5), new TPoint());
+		TStorage.gI().put(pic3.hashCode(), pic3);
+		Integer movedMinusPoint = pic3.hashCode();
+		m.addRule(new MRule(new MSimple(point), new MSimple(movedPoint)));
+		m.addRule(new MRule(new MSimple(point), new MSimple(movedMinusPoint)));
+
 		Parser p = new Parser();
 		try {
 			root = p.parse(new File("tree"));
-			TPicture pic1 = new TPoint();
-			TStorage.gI().put(pic1.hashCode(), pic1);
-			expr1 = pic1.hashCode();
-			TPicture pic2 = new TTranslate(new TNumber(5), new TNumber(5), new TPoint());
-			TStorage.gI().put(pic2.hashCode(), pic2);
-			expr2 = pic2.hashCode();
 		} catch (SyntaxErrorException e) {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
 		}
-		myrule = new MRule(new MSimple(expr1), new MSimple(expr2));
 		this.pushMatrix();
-		TStorage.gI().get(root).draw(this);	//for testing
+		TStorage.gI().get(root).draw(this); // for testing
 		System.out.println(TStorage.gI().get(root));
 		System.out.println(TStorage.gI());
 	}
@@ -59,7 +62,7 @@ public class LangDrawer extends PApplet {
 	public void draw() {
 		clear();
 		TStorage.gI().get(root).draw(this);
-		root = myrule.apply(root);
+		root = m.mutate(root);
 		System.out.println(TStorage.gI().get(root));
 	}
 }
