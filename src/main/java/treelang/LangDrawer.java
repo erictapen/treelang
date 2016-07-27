@@ -5,6 +5,7 @@ import treelang.mutate.MSimple;
 import treelang.mutate.Mutator;
 import treelang.parser.Parser;
 import treelang.parser.SyntaxErrorException;
+import treelang.picture.TList;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
 import treelang.picture.TPoint;
@@ -37,7 +38,7 @@ public class LangDrawer extends PApplet {
 		TPicture pic1 = new TPoint();
 		TStorage.gI().put(pic1.hashCode(), pic1);
 		Integer point = pic1.hashCode();
-		TPicture pic2 = new TTranslate(new TNumber(5), new TNumber(5), new TPoint());
+		TPicture pic2 = new TList(new TTranslate(new TNumber(5), new TNumber(5), new TPoint()), new TPoint());
 		TStorage.gI().put(pic2.hashCode(), pic2);
 		Integer movedPoint = pic2.hashCode();
 		TPicture pic3 = new TTranslate(new TNumber(-5), new TNumber(5), new TPoint());
@@ -63,6 +64,6 @@ public class LangDrawer extends PApplet {
 		clear();
 		TStorage.gI().get(root).draw(this);
 		root = m.mutate(root);
-		System.out.println(TStorage.gI().get(root));
+		//System.out.println(TStorage.gI().get(root));
 	}
 }

@@ -41,6 +41,12 @@ public class TList implements TPicture {
 		this.hash = hash;
 	}
 
+	public TList(TPicture p1, TPicture picChild) {
+		this(p1);
+		TStorage.gI().put(picChild.hashCode(), picChild);
+		children.add(picChild.hashCode());
+	}
+
 	public int getSize() {
 		return children.size();
 	}
