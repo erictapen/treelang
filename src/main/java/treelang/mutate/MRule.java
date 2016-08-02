@@ -29,4 +29,8 @@ public class MRule {
 		return null;
 	}
 	
+	public String toString() {
+		return origin.toString() + "\n-->\n" + target.toString() + "\n";
+	}
+	
 }

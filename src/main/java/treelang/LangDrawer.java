@@ -1,16 +1,8 @@
 package treelang;
 
-import treelang.mutate.MRule;
-import treelang.mutate.MSimple;
 import treelang.mutate.Mutator;
 import treelang.parser.TreeLangParser;
 import treelang.parser.SyntaxErrorException;
-import treelang.picture.TList;
-import treelang.picture.TNumber;
-import treelang.picture.TPicture;
-import treelang.picture.TPoint;
-import treelang.picture.TTranslate;
-
 import java.io.File;
 
 import processing.core.PApplet;
@@ -26,7 +18,7 @@ public class LangDrawer extends PApplet {
 
 	private Integer root;
 
-	private Mutator m = new Mutator();
+	private Mutator m = new Mutator("rule");
 
 	public void setup() {
 
@@ -34,18 +26,6 @@ public class LangDrawer extends PApplet {
 		size(512, 512);
 		background(0);
 		fill(255, 255, 255);
-
-		TPicture pic1 = new TPoint();
-		TStorage.gI().put(pic1.hashCode(), pic1);
-		Integer point = pic1.hashCode();
-		TPicture pic2 = new TList(new TTranslate(new TNumber(1), new TNumber(1), new TPoint()), new TPoint());
-		TStorage.gI().put(pic2.hashCode(), pic2);
-		Integer movedPoint = pic2.hashCode();
-		TPicture pic3 = new TTranslate(new TNumber(-1), new TNumber(1), new TPoint());
-		TStorage.gI().put(pic3.hashCode(), pic3);
-		Integer movedMinusPoint = pic3.hashCode();
-		m.addRule(new MRule(new MSimple(point), new MSimple(movedPoint)));
-		m.addRule(new MRule(new MSimple(point), new MSimple(movedMinusPoint)));
 
 		TreeLangParser p = new TreeLangParser();
 		try {
@@ -58,6 +38,7 @@ public class LangDrawer extends PApplet {
 		TStorage.gI().get(root).draw(this); // for testing
 		System.out.println(TStorage.gI().get(root));
 		System.out.println(TStorage.gI());
+		System.out.println(m);
 	}
 
 	public void draw() {

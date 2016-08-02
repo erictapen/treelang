@@ -20,7 +20,6 @@ import treelang.picture.TPicture;
 public class TreeLangParser {
 
 	public Integer parse(File infile) throws SyntaxErrorException {
-
 		try (BufferedReader br = new BufferedReader(new FileReader(infile))) {
 			return parse(br);
 		} catch (FileNotFoundException e) {
@@ -32,7 +31,6 @@ public class TreeLangParser {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 	public Integer parse(String text) throws SyntaxErrorException {

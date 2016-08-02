@@ -1,5 +1,6 @@
 package treelang.mutate;
 
+import treelang.TStorage;
 import treelang.picture.TPicture;
 
 /** Simple expression for a MRule
@@ -23,6 +24,10 @@ public class MSimple implements MExpression {
 	@Override
 	public Integer getValue() {
 		return value;
+	}
+	
+	public String toString() {
+		return TStorage.gI().get(value).toString();
 	}
 
 }
