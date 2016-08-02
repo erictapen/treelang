@@ -3,7 +3,7 @@ package treelang;
 import treelang.mutate.MRule;
 import treelang.mutate.MSimple;
 import treelang.mutate.Mutator;
-import treelang.parser.Parser;
+import treelang.parser.TreeLangParser;
 import treelang.parser.SyntaxErrorException;
 import treelang.picture.TList;
 import treelang.picture.TNumber;
@@ -38,16 +38,16 @@ public class LangDrawer extends PApplet {
 		TPicture pic1 = new TPoint();
 		TStorage.gI().put(pic1.hashCode(), pic1);
 		Integer point = pic1.hashCode();
-		TPicture pic2 = new TList(new TTranslate(new TNumber(5), new TNumber(5), new TPoint()), new TPoint());
+		TPicture pic2 = new TList(new TTranslate(new TNumber(1), new TNumber(1), new TPoint()), new TPoint());
 		TStorage.gI().put(pic2.hashCode(), pic2);
 		Integer movedPoint = pic2.hashCode();
-		TPicture pic3 = new TTranslate(new TNumber(-5), new TNumber(5), new TPoint());
+		TPicture pic3 = new TTranslate(new TNumber(-1), new TNumber(1), new TPoint());
 		TStorage.gI().put(pic3.hashCode(), pic3);
 		Integer movedMinusPoint = pic3.hashCode();
 		m.addRule(new MRule(new MSimple(point), new MSimple(movedPoint)));
 		m.addRule(new MRule(new MSimple(point), new MSimple(movedMinusPoint)));
 
-		Parser p = new Parser();
+		TreeLangParser p = new TreeLangParser();
 		try {
 			root = p.parse(new File("tree"));
 		} catch (SyntaxErrorException e) {

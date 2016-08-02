@@ -17,7 +17,7 @@ import treelang.picture.TPicture;
  * @author justin
  *
  */
-public class Parser {
+public class TreeLangParser {
 
 	public Integer parse(File infile) throws SyntaxErrorException {
 
