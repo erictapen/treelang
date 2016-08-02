@@ -47,6 +47,10 @@ public class TList implements TPicture {
 		children.add(picChild.hashCode());
 	}
 
+	public ArrayList<Integer> getChildren() {
+		return children;
+	}
+
 	public int getSize() {
 		return children.size();
 	}

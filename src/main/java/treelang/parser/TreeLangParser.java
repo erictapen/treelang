@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 
 import treelang.TStorage;
+import treelang.picture.TList;
 import treelang.picture.TPicture;
 
 /**
@@ -59,9 +60,8 @@ public class TreeLangParser {
 			if (cursorList.get(lvl - 1) != null)
 				cursorList.get(lvl - 1).addChild(temp);
 		}
-		TPicture result = cursorList.get(0).getTPic();
-		TStorage.gI().put(result.hashCode(), result);
-		return result.hashCode();
+		//return the first child of the implicit list. makes sense, I promise.
+		return ((TList) cursorList.get(0).getTPic()).getChildren().get(0);
 	}
 
 	private int determineLevel(String line) {
