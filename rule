@@ -1,28 +1,64 @@
 Point
 -->
-Translate
-	1
-	1
+List
 	Point
+	Translate
+		1
+		1
+		Point
 
 Point
 -->
+List
+	Point
+	Translate
+		1
+		-1
+		Point
+
+Point
+-->
+List
+	Point
+	Translate
+		-1
+		1
+		Point
+
+Point
+-->
+List
+	Point
+	Translate
+		-1
+		-1
+		Point
+
+Translate
+	1
+	1
+	Point
+-->
+Point
+
 Translate
 	1
 	-1
 	Point
-
-Point
 -->
+Point
+
 Translate
 	-1
 	1
 	Point
-
-Point
 -->
+Point
+
 Translate
 	-1
 	-1
 	Point
+-->
+Point
 

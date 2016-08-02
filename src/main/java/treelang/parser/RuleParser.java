@@ -25,6 +25,8 @@ public class RuleParser {
 		TreeLangParser p = new TreeLangParser();
 		while (!text.isEmpty()) {
 			int originend = text.indexOf("\n-->\n");
+			if (originend == -1)
+				break;
 			int targetend = text.indexOf("\n\n");
 			if (targetend == -1)
 				targetend = text.length() - 1;
