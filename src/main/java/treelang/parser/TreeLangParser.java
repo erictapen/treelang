@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-import treelang.TStorage;
 import treelang.picture.TList;
-import treelang.picture.TPicture;
 
 /**
  * Parses an existing treelang file and returns a root object

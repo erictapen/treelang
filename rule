@@ -5,4 +5,24 @@ Translate
 	1
 	Point
 
+Point
+-->
+Translate
+	1
+	-1
+	Point
+
+Point
+-->
+Translate
+	-1
+	1
+	Point
+
+Point
+-->
+Translate
+	-1
+	-1
+	Point
 
