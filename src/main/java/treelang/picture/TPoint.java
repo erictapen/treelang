@@ -33,7 +33,7 @@ public class TPoint implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash==identifier)
+		if (hash == identifier)
 			return expression;
 		return this.hashCode();
 	}
@@ -52,8 +52,7 @@ public class TPoint implements TPicture {
 
 	@Override
 	public void draw(PApplet p) {
-		p.stroke(255);
-		p.point(p.width / 2, p.height / 2);
+		p.point(0, 0);
 	}
 
 	@Override

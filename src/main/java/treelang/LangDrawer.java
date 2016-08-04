@@ -35,6 +35,7 @@ public class LangDrawer extends PApplet {
 			e.printStackTrace();
 		}
 		this.pushMatrix();
+		this.stroke(255);
 		TStorage.gI().get(root).draw(this); // for testing
 		System.out.println(TStorage.gI().get(root));
 		System.out.println(TStorage.gI());
@@ -43,8 +44,9 @@ public class LangDrawer extends PApplet {
 
 	public void draw() {
 		clear();
+		this.translate(width / 2, height / 2);
 		TStorage.gI().get(root).draw(this);
 		root = m.mutate(root);
-		//System.out.println(TStorage.gI().get(root));
+		// System.out.println(TStorage.gI().get(root));
 	}
 }
