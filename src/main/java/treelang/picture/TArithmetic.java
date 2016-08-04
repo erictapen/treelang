@@ -5,6 +5,7 @@ import java.util.Stack;
 
 import processing.core.PApplet;
 import treelang.TStorage;
+import treelang.mutate.MExpression;
 
 public abstract class TArithmetic implements TPicture {
 
@@ -56,8 +57,11 @@ public abstract class TArithmetic implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(Integer expression) {
-		// TODO Auto-generated method stub
+	public ArrayList<Stack<Byte>> match(MExpression expression) {
+		ArrayList<Stack<Byte>> res = new ArrayList<Stack<Byte>>();
+		if(expression.matches(this))
+			res.add(new Stack<Byte>());
+		//TODO
 		return null;
 	}
 
