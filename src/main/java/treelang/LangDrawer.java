@@ -18,7 +18,7 @@ public class LangDrawer extends PApplet {
 
 	private Integer root;
 
-	private Mutator m = new Mutator("rule");
+	private Mutator m = new Mutator("rule.rule");
 
 	public void setup() {
 
@@ -29,7 +29,7 @@ public class LangDrawer extends PApplet {
 
 		TreeLangParser p = new TreeLangParser();
 		try {
-			root = p.parse(new File("tree"));
+			root = p.parse(new File("tree.tree"));
 		} catch (SyntaxErrorException e) {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
