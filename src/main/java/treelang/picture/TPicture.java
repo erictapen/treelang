@@ -22,7 +22,7 @@ public interface TPicture {
 
 	Integer replace(Integer origin, Integer target, Stack<Byte> dest);
 
-	ArrayList<Stack<Byte>> match(MExpression expression);
+	ArrayList<Stack<Byte>> findMatches(MExpression expression);
 
 	public int hashCode();
 

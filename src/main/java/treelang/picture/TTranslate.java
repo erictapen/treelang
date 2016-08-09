@@ -99,7 +99,7 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(MExpression expression) {
+	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
 		// TODO Auto-generated method stub
 		return null;
 	}

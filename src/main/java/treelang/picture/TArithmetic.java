@@ -65,12 +65,8 @@ public abstract class TArithmetic implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(MExpression expression) {
-		ArrayList<Stack<Byte>> res = new ArrayList<Stack<Byte>>();
-		if (expression.matches(this))
-			res.add(new Stack<Byte>());
-		this.getOp1().match(expression);
-		this.getOp2().match(expression);
+	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
