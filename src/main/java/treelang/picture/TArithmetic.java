@@ -61,7 +61,8 @@ public abstract class TArithmetic implements TPicture {
 		ArrayList<Stack<Byte>> res = new ArrayList<Stack<Byte>>();
 		if(expression.matches(this))
 			res.add(new Stack<Byte>());
-		//TODO
+		this.getOp1().match(expression);
+		this.getOp2().match(expression);
 		return null;
 	}
 
@@ -70,12 +71,12 @@ public abstract class TArithmetic implements TPicture {
 
 	}
 
-	public Integer getOp1() {
-		return op1;
+	public TPicture getOp1() {
+		return TStorage.gI().get(op1);
 	}
 
-	public Integer getOp2() {
-		return op2;
+	public TPicture getOp2() {
+		return TStorage.gI().get(op2);
 	}
 
 }
