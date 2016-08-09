@@ -5,10 +5,11 @@ import java.util.Stack;
 
 import processing.core.PApplet;
 import treelang.TStorage;
+import treelang.mutate.MExpression;
 
 public final class TForLoop implements TPicture {
 
-	private final String ident;
+	private final Integer ident;
 
 	private final Integer var;
 	private final Integer expr;
@@ -16,8 +17,9 @@ public final class TForLoop implements TPicture {
 	private static int hashInit = 976;
 	private final int hash;
 
-	public TForLoop(String ident, TPicture var, TPicture expr) {
-		this.ident = ident;
+	public TForLoop(TPicture ident, TPicture var, TPicture expr) {
+		this.ident = new Integer(ident.hashCode());
+		TStorage.gI().put(this.ident, ident);
 		this.var = new Integer(var.hashCode());
 		TStorage.gI().put(this.var, var);
 		this.expr = new Integer(expr.hashCode());
@@ -49,6 +51,12 @@ public final class TForLoop implements TPicture {
 	}
 
 	@Override
+	public Integer[] getArgs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public int hashCode() {
 		return hash;
 	}
@@ -65,7 +73,7 @@ public final class TForLoop implements TPicture {
 		if (newExpr != this.expr)
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TForLoop(this.ident, TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
+			TPicture newNode = new TForLoop(TStorage.gI().get(ident), TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
 			TStorage.gI().put(newHash, newNode);
 			return newHash;
@@ -80,7 +88,7 @@ public final class TForLoop implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(Integer expression) {
+	public ArrayList<Stack<Byte>> match(MExpression expression) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -90,14 +98,14 @@ public final class TForLoop implements TPicture {
 		ArrayList<TPicture> newNodes = new ArrayList<TPicture>();
 		int amount = TStorage.gI().get(this.var).getNumber().getValue();
 		for (int i = amount; i >= 0; i--)
-			newNodes.add(new TLambda(ident, new TNumber(i), TStorage.gI().get(expr)));
+			newNodes.add(new TLambda(TStorage.gI().get(ident), new TNumber(i), TStorage.gI().get(expr)));
 		(new TList(newNodes)).draw(p);
 	}
 
 	@Override
 	public String toString() {
 		String res = "For";
-		res += "\n\t" + ident;
+		res += "\n\t" + ident.toString();
 		res += "\n\t" + getVar().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getExpr().toString().replaceAll("\n", "\n\t");
 		return res;

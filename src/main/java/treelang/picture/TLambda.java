@@ -5,6 +5,7 @@ import java.util.Stack;
 
 import processing.core.PApplet;
 import treelang.TStorage;
+import treelang.mutate.MExpression;
 
 /**
  * treelang representation of a lambda expression. This can be used as an
@@ -18,42 +19,55 @@ import treelang.TStorage;
  *
  */
 public class TLambda implements TPicture {
-	private final String ident;
 
-	private final Integer var;
-	private final Integer expr;
+	/**
+	 * Identifier, Variablevalue, Expression
+	 * 
+	 */
+	private final int ARGUMENT_COUNT = 3;
+	private final Integer[] args;
 
 	private static int hashInit = 730;
 	private final int hash;
 
-	public TLambda(String ident, TPicture var, TPicture expr) {
-		this.ident = ident;
-		this.var = new Integer(var.hashCode());
-		TStorage.gI().put(this.var, var);
-		this.expr = new Integer(expr.hashCode());
-		TStorage.gI().put(this.expr, expr);
+	public TLambda(TPicture ident, TPicture var, TPicture expr) {
+
+		this.args = new Integer[ARGUMENT_COUNT];
+		this.args[0] = new Integer(ident.hashCode());
+		TStorage.gI().put(this.args[0], ident);
+		this.args[1] = new Integer(var.hashCode());
+		TStorage.gI().put(this.args[1], var);
+		this.args[2] = new Integer(expr.hashCode());
+		TStorage.gI().put(this.args[2], expr);
 		int hash = hashInit;
 		hash = 37 * hash + ident.hashCode();
-		hash = 37 * hash + this.var;
-		hash = 37 * hash + this.expr;
+		hash = 37 * hash + this.args[1];
+		hash = 37 * hash + this.args[2];
 		this.hash = hash;
 	}
 
+	public TPicture getIdent() {
+		return TStorage.gI().get(args[0]);
+	}
+
 	public TPicture getVar() {
-		return TStorage.gI().get(var);
+		return TStorage.gI().get(args[1]);
 	}
 
 	public TPicture getExpr() {
-		return TStorage.gI().get(expr);
+		return TStorage.gI().get(args[2]);
 	}
 
 	@Override
 	public TNumber getNumber() {
-		TIdentifier identifier = new TIdentifier(ident);
-		Integer identifierHash = identifier.hashCode();
-		TStorage.gI().put(identifierHash, identifier);
-		Integer unfoldedLambda = getExpr().replaceAll(identifierHash, var);
+		Integer unfoldedLambda = getExpr().replaceAll(args[0], args[1]);
 		return TStorage.gI().get(unfoldedLambda).getNumber();
+	}
+
+	@Override
+	public Integer[] getArgs() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -63,17 +77,17 @@ public class TLambda implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash==identifier)
+		if (hash == identifier)
 			return expression;
 		boolean needsUnLambda = false;
-		Integer newVar = TStorage.gI().get(this.var).replaceAll(identifier, expression);
-		if (newVar != this.var)
+		Integer newVar = TStorage.gI().get(this.args[1]).replaceAll(identifier, expression);
+		if (newVar != this.args[1])
 			needsUnLambda = true;
-		Integer newExpr = TStorage.gI().get(this.expr).replaceAll(identifier, expression);
-		if (newExpr != this.expr)
+		Integer newExpr = TStorage.gI().get(this.args[2]).replaceAll(identifier, expression);
+		if (newExpr != this.args[2])
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TLambda(this.ident, TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
+			TPicture newNode = new TLambda(TStorage.gI().get(args[0]), TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
 			TStorage.gI().put(newHash, newNode);
 			return newHash;
@@ -88,24 +102,21 @@ public class TLambda implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(Integer expression) {
+	public ArrayList<Stack<Byte>> match(MExpression expression) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void draw(PApplet p) {
-		TIdentifier identifier = new TIdentifier(ident);
-		Integer identifierHash = identifier.hashCode();
-		TStorage.gI().put(identifierHash, identifier);
-		Integer unfoldedLambda = getExpr().replaceAll(identifierHash, var);
+		Integer unfoldedLambda = getExpr().replaceAll(args[0], args[1]);
 		TStorage.gI().get(unfoldedLambda).draw(p);
 	}
 
 	@Override
 	public String toString() {
 		String res = "Lambda";
-		res += "\n\t" + ident;
+		res += "\n\t" + getIdent();
 		res += "\n\t" + getVar().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getExpr().toString().replaceAll("\n", "\n\t");
 		return res;
