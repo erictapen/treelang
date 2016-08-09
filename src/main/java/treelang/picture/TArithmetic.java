@@ -1,22 +1,27 @@
 package treelang.picture;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import processing.core.PApplet;
 import treelang.TStorage;
+import treelang.mutate.MExpression;
 
 public abstract class TArithmetic implements TPicture {
 
-	private final Integer op1;
-	private final Integer op2;
+	private final int ARGUMENT_COUNT = 2;
+	private final Integer[] args;
 
 	private final int hash;
 
 	public TArithmetic(TPicture op1, TPicture op2, int hash) {
-		this.op1 = new Integer(op1.hashCode());
-		TStorage.gI().put(this.op1, op1);
-		this.op2 = new Integer(op2.hashCode());
-		TStorage.gI().put(this.op2, op2);
-		hash = 37 * hash + this.op1;
-		hash = 37 * hash + this.op2;
+		this.args = new Integer[ARGUMENT_COUNT];
+		this.args[0] = new Integer(op1.hashCode());
+		TStorage.gI().put(this.args[0], op1);
+		this.args[1] = new Integer(op2.hashCode());
+		TStorage.gI().put(this.args[1], op2);
+		hash = 37 * hash + this.args[0];
+		hash = 37 * hash + this.args[0];
 		this.hash = hash;
 	}
 
@@ -26,23 +31,43 @@ public abstract class TArithmetic implements TPicture {
 	}
 
 	@Override
-	public Integer unLambda(String identifier, Integer expression) {
+	public Integer[] getArgs() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer replaceAll(Integer identifier, Integer expression) {
+		if (hash == identifier)
+			return expression;
 		boolean needsUnLambda = false;
-		Integer newOp1 = TStorage.gI().get(this.op1).unLambda(identifier, expression);
-		if (newOp1 != this.op1)
+		Integer newOp1 = TStorage.gI().get(this.args[0]).replaceAll(identifier, expression);
+		if (newOp1 != this.args[0])
 			needsUnLambda = true;
-		Integer newOp2 = TStorage.gI().get(this.op2).unLambda(identifier, expression);
-		if (newOp2 != this.op2)
+		Integer newOp2 = TStorage.gI().get(this.args[1]).replaceAll(identifier, expression);
+		if (newOp2 != this.args[1])
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			this.unLambdaHelper(newOp1, newOp2);
+			this.replaceAllHelper(newOp1, newOp2);
 		}
 		return this.hashCode();
 	}
 
-	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {
-		// TODO Auto-generated method stub
+	protected void replaceAllHelper(Integer newOp1, Integer newOp2) {
+		System.out.println(
+				"Warning! abstract TArithmetic.replaceAllHelper was called, but this must be implemented by child classes!");
+	}
 
+	@Override
+	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -50,12 +75,12 @@ public abstract class TArithmetic implements TPicture {
 
 	}
 
-	public Integer getOp1() {
-		return op1;
+	public TPicture getOp1() {
+		return TStorage.gI().get(args[0]);
 	}
 
-	public Integer getOp2() {
-		return op2;
+	public TPicture getOp2() {
+		return TStorage.gI().get(args[1]);
 	}
 
 }

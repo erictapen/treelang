@@ -26,11 +26,12 @@ public class TStorage extends HashMap<Integer, TPicture> {
 
 	@Override
 	public String toString() {
-		String res = "TStorage:\n";
+		String res = this.size() + " Nodes in storage:\n";
 		for (Entry<Integer, TPicture> x : this.entrySet()) {
 			res += x.getKey() + " ==\n";
 			res += x.getValue() + "\n";
 		}
+		res += this.size() + " Nodes in storage\n";
 		return res;
 	}
 

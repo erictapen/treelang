@@ -10,7 +10,7 @@ public final class TMinus extends TArithmetic implements TPicture {
 		super(op1, op2, hashInit);
 	}
 
-	protected void unLambdaHelper(Integer newOp1, Integer newOp2) {
+	protected void replaceAllHelper(Integer newOp1, Integer newOp2) {
 		TPicture newNode = new TMinus(TStorage.gI().get(newOp1), TStorage.gI().get(newOp2));
 		Integer newHash = newNode.hashCode();
 		TStorage.gI().put(newHash, newNode);
