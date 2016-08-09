@@ -5,6 +5,7 @@ import java.util.Stack;
 
 import processing.core.PApplet;
 import treelang.TStorage;
+import treelang.mutate.MExpression;
 
 /**
  * A treelang node of type Picture, which consists of multiple Pictures. These
@@ -15,49 +16,64 @@ import treelang.TStorage;
  */
 public class TList implements TPicture {
 
-	private final ArrayList<Integer> children = new ArrayList<Integer>();
+	private final Integer[] args;
 
 	private static int hashInit = 911;
 	private final int hash;
 
 	public TList(ArrayList<TPicture> picChilds) {
-		for (TPicture x : picChilds) {
-			Integer hash = new Integer(x.hashCode());
-			this.children.add(hash);
-			TStorage.gI().put(hash, x);
+		this.args = new Integer[picChilds.size()];
+		for (int i = 0; i < args.length; i++) {
+			Integer pichash = picChilds.get(i).hashCode();
+			args[i] = pichash;
+			TStorage.gI().put(pichash, picChilds.get(i));
 		}
 		int hash = hashInit;
-		for (Integer x : this.children)
+		for (Integer x : this.args)
 			hash = 37 * hash + x;
 		this.hash = hash;
 	}
 
 	public TList(TPicture picChild) {
-		TStorage.gI().put(picChild.hashCode(), picChild);
-		children.add(picChild.hashCode());
+		this.args = new Integer[1];
+		Integer pichash = picChild.hashCode();
+		TStorage.gI().put(pichash, picChild);
+		args[0] = pichash;
 		int hash = hashInit;
-		for (Integer x : this.children)
-			hash = 37 * hash + x;
+		hash = 37 * hash + args[0];
 		this.hash = hash;
 	}
 
-	public TList(TPicture p1, TPicture picChild) {
-		this(p1);
-		TStorage.gI().put(picChild.hashCode(), picChild);
-		children.add(picChild.hashCode());
+	public TList(TPicture p0, TPicture p1) {
+		this.args = new Integer[2];
+		Integer pic0hash = p0.hashCode();
+		TStorage.gI().put(pic0hash, p0);
+		args[0] = pic0hash;
+		Integer pic1hash = p1.hashCode();
+		TStorage.gI().put(pic1hash, p1);
+		args[1] = pic1hash;
+		int hash = hashInit;
+		hash = 37 * hash + args[0];
+		hash = 37 * hash + args[1];
+		this.hash = hash;
 	}
 
-	public ArrayList<Integer> getChildren() {
-		return children;
+	public Integer[] getChildren() {
+		return args;
 	}
 
 	public int getSize() {
-		return children.size();
+		return args.length;
 	}
 
 	@Override
 	public TNumber getNumber() {
-		return new TNumber(this.children.size());
+		return new TNumber(this.args.length);
+	}
+
+	@Override
+	public Integer[] getArgs() {
+		return args;
 	}
 
 	@Override
@@ -71,7 +87,7 @@ public class TList implements TPicture {
 			return expression;
 		boolean needsUnLambda = false;
 		ArrayList<TPicture> newList = new ArrayList<TPicture>();
-		for (Integer x : this.children) {
+		for (Integer x : this.args) {
 			Integer newEl = TStorage.gI().get(x).replaceAll(identifier, expression);
 			newList.add(TStorage.gI().get(newEl));
 			if (x != newEl)
@@ -93,21 +109,21 @@ public class TList implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(Integer expression) {
+	public ArrayList<Stack<Byte>> match(MExpression expression) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void draw(PApplet p) {
-		for (Integer x : this.children)
+		for (Integer x : this.args)
 			TStorage.gI().get(x).draw(p);
 	}
 
 	@Override
 	public String toString() {
 		String res = "List";
-		for (Integer x : children)
+		for (Integer x : args)
 			res += "\n\t" + TStorage.gI().get(x).toString().replaceAll("\n", "\n\t");
 		return res;
 	}

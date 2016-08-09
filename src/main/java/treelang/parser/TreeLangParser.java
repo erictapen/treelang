@@ -59,7 +59,7 @@ public class TreeLangParser {
 				cursorList.get(lvl - 1).addChild(temp);
 		}
 		//return the first child of the implicit list. makes sense, I promise.
-		return ((TList) cursorList.get(0).getTPic()).getChildren().get(0);
+		return ((TList) cursorList.get(0).getTPic()).getChildren()[0];
 	}
 
 	private int determineLevel(String line) {

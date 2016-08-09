@@ -15,6 +15,8 @@ import treelang.mutate.MExpression;
 public interface TPicture {
 
 	public TNumber getNumber();
+	
+	public Integer[] getArgs();
 
 	Integer replaceAll(Integer origin, Integer target);
 

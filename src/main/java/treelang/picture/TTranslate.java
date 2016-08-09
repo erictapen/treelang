@@ -5,6 +5,7 @@ import java.util.Stack;
 
 import processing.core.PApplet;
 import treelang.TStorage;
+import treelang.mutate.MExpression;
 
 /**
  * A treelang node of type Number -> Number -> Picture -> Picture which moves a
@@ -15,32 +16,39 @@ import treelang.TStorage;
  */
 public class TTranslate implements TPicture {
 
-	private final Integer num1;
-	private final Integer num2;
-	private final Integer pic;
+	/** num1 num2 pic
+	 * 
+	 */
+	private final int ARGUMENT_COUNT = 3;
+	private final Integer[] args;
 
 	private static int hashInit = 364;
 	private final int hash;
 
 	public TTranslate(TPicture num1, TPicture num2, TPicture pic) {
 		super();
-		this.num1 = new Integer(num1.hashCode());
-		TStorage.gI().put(this.num1, num1);
-		this.num2 = new Integer(num2.hashCode());
-		TStorage.gI().put(this.num2, num2);
-		this.pic = new Integer(pic.hashCode());
-		TStorage.gI().put(this.pic, pic);
+		this.args = new Integer[ARGUMENT_COUNT];
+		this.args[0] = new Integer(num1.hashCode());
+		TStorage.gI().put(this.args[0], num1);
+		this.args[1] = new Integer(num2.hashCode());
+		TStorage.gI().put(this.args[1], num2);
+		this.args[2] = new Integer(pic.hashCode());
+		TStorage.gI().put(this.args[2], pic);
 		int hash = hashInit;
-		hash = 37 * hash + this.num1;
-		hash = 37 * hash + this.num2;
-		hash = 37 * hash + this.pic;
+		hash = 37 * hash + this.args[0];
+		hash = 37 * hash + this.args[1];
+		hash = 37 * hash + this.args[2];
 		this.hash = hash;
 	}
 
 	@Override
 	public TNumber getNumber() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TNumber(0);
+	}
+
+	@Override
+	public Integer[] getArgs() {
+		return args;
 	}
 
 	@Override
@@ -49,15 +57,15 @@ public class TTranslate implements TPicture {
 	}
 
 	private TPicture getNum1() {
-		return TStorage.gI().get(num1);
+		return TStorage.gI().get(args[0]);
 	}
 
 	private TPicture getNum2() {
-		return TStorage.gI().get(num2);
+		return TStorage.gI().get(args[1]);
 	}
 
 	private TPicture getPic() {
-		return TStorage.gI().get(pic);
+		return TStorage.gI().get(args[2]);
 	}
 
 	@Override
@@ -65,14 +73,14 @@ public class TTranslate implements TPicture {
 		if (hash==identifier)
 			return expression;
 		boolean needsUnLambda = false;
-		Integer newNum1 = TStorage.gI().get(this.num1).replaceAll(identifier, expression);
-		if (newNum1 != this.num1)
+		Integer newNum1 = TStorage.gI().get(this.args[0]).replaceAll(identifier, expression);
+		if (newNum1 != this.args[0])
 			needsUnLambda = true;
-		Integer newNum2 = TStorage.gI().get(this.num2).replaceAll(identifier, expression);
-		if (newNum2 != this.num2)
+		Integer newNum2 = TStorage.gI().get(this.args[1]).replaceAll(identifier, expression);
+		if (newNum2 != this.args[1])
 			needsUnLambda = true;
-		Integer newPic = TStorage.gI().get(this.pic).replaceAll(identifier, expression);
-		if (newPic != this.pic)
+		Integer newPic = TStorage.gI().get(this.args[2]).replaceAll(identifier, expression);
+		if (newPic != this.args[2])
 			needsUnLambda = true;
 		if (needsUnLambda) {
 			TPicture newNode = new TTranslate(TStorage.gI().get(newNum1), TStorage.gI().get(newNum2),
@@ -91,7 +99,7 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(Integer expression) {
+	public ArrayList<Stack<Byte>> match(MExpression expression) {
 		// TODO Auto-generated method stub
 		return null;
 	}

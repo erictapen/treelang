@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import processing.core.PApplet;
+import treelang.mutate.MExpression;
 
 /**
  * A basic treelang type which simply holds an Integer. Castable to Picture.
@@ -12,6 +13,8 @@ import processing.core.PApplet;
  *
  */
 public class TNumber implements TPicture {
+
+	private final int ARGUMENT_COUNT = 0;
 
 	private final int value;
 
@@ -36,6 +39,11 @@ public class TNumber implements TPicture {
 	}
 
 	@Override
+	public Integer[] getArgs() {
+		return new Integer[ARGUMENT_COUNT];
+	}
+
+	@Override
 	public int hashCode() {
 		return hash;
 	}
@@ -54,7 +62,7 @@ public class TNumber implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(Integer expression) {
+	public ArrayList<Stack<Byte>> match(MExpression expression) {
 		// TODO Auto-generated method stub
 		return null;
 	}

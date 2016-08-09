@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import processing.core.PApplet;
+import treelang.mutate.MExpression;
 
 /**
  * A treelang node of type Picture which consists solely of a white Pixel in the
@@ -13,6 +14,8 @@ import processing.core.PApplet;
  *
  */
 public class TPoint implements TPicture {
+
+	private final int ARGUMENT_COUNT = 0;
 
 	private static int hashInit = 173;
 	private static int hash;
@@ -24,6 +27,11 @@ public class TPoint implements TPicture {
 
 	public TNumber getNumber() {
 		return new TNumber(0);
+	}
+
+	@Override
+	public Integer[] getArgs() {
+		return new Integer[ARGUMENT_COUNT];
 	}
 
 	@Override
@@ -45,7 +53,7 @@ public class TPoint implements TPicture {
 	}
 
 	@Override
-	public ArrayList<Stack<Byte>> match(Integer expression) {
+	public ArrayList<Stack<Byte>> match(MExpression expression) {
 		// TODO Auto-generated method stub
 		return null;
 	}
