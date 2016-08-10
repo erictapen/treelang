@@ -20,8 +20,13 @@ public interface TPicture {
 
 	Integer replaceAll(Integer origin, Integer target);
 
-	Integer replace(Integer origin, Integer target, Stack<Byte> dest);
+	Integer replace(Stack<Byte> dest, Integer target);
 
+	/**
+	 * Takes an rule expression and delivers the locations of the matches.
+	 * @param expression
+	 * @return
+	 */
 	ArrayList<Stack<Byte>> findMatches(MExpression expression);
 
 	public int hashCode();

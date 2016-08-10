@@ -95,14 +95,14 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
+	public Integer replace(Stack<Byte> dest, Integer target) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
