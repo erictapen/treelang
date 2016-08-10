@@ -68,7 +68,7 @@ public abstract class AbstractAlias implements TPicture {
 	public static TPicture generateAliasExpression(String caption, ArrayList<TPicture> picChilds) {
 		try {
 			TreeLangParser p = new TreeLangParser();
-			TList aliasFromFile = (TList) TStorage.gI().get(p.parse(new File("alias/" + caption + ".tree")));
+			TList aliasFromFile = (TList) p.parse(new File("alias/" + caption + ".tree")).getTPic();
 			//need to find the hash
 			Integer[] children = aliasFromFile.getChildren();
 			Integer resultHash = children[children.length - 1];

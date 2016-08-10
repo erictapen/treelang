@@ -13,11 +13,11 @@ import treelang.picture.TPicture;
 @SuppressWarnings("serial")
 public class TStorage extends HashMap<Integer, TPicture> {
 	private static TStorage instance = null;
-	
+
 	private HashSet<Integer> aliasHashes = new HashSet<Integer>();
 
 	private TStorage() {
-		
+
 	}
 
 	public static TStorage gI() {
@@ -25,17 +25,24 @@ public class TStorage extends HashMap<Integer, TPicture> {
 			instance = new TStorage();
 		return instance;
 	}
-	
+
+	public TPicture[] getAll(Integer[] keys) {
+		TPicture[] result = new TPicture[keys.length];
+		for (int i = 0; i < keys.length; i++)
+			result[i] = this.get(keys[i]);
+		return result;
+	}
+
 	public TPicture putNode(Integer key, TPicture val) {
-		if(!aliasHashes.contains(key))
+		if (!aliasHashes.contains(key))
 			this.put(key, val);
 		return val;
 	}
-	
+
 	public TPicture forcePutNode(Integer key, TPicture val) {
 		return this.put(key, val);
 	}
-	
+
 	public void registerAliasHash(Integer hash) {
 		aliasHashes.add(hash);
 	}

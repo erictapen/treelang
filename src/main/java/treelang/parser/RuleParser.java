@@ -5,8 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import treelang.mutate.MExpression;
 import treelang.mutate.MRule;
-import treelang.mutate.MSimple;
 
 /**
  * Parser for .rule files.
@@ -30,9 +31,11 @@ public class RuleParser {
 			int targetend = text.indexOf("\n\n");
 			if (targetend == -1)
 				targetend = text.length() - 1;
-			Integer origin = p.parse(text.substring(0, originend));
-			Integer target = p.parse(text.substring(originend + 5, targetend));
-			result.add(new MRule(new MSimple(origin), new MSimple(target))); // TODO
+			PNode porigin = p.parse(text.substring(0, originend));
+			PNode ptarget = p.parse(text.substring(originend + 5, targetend));
+			MExpression origin = porigin.getMExpression();
+			MExpression target = ptarget.getMExpression();
+			result.add(new MRule(origin, target));
 			text = text.substring(targetend + 2);
 		}
 		return result;

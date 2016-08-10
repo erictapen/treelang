@@ -9,6 +9,10 @@ import treelang.picture.TPicture;
  */
 public class MSimple implements MExpression {
 
+	/**
+	 * {@link TPicture} reference
+	 * 
+	 */
 	private final Integer value;
 	
 	public MSimple(Integer value) {

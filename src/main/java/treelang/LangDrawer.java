@@ -29,7 +29,7 @@ public class LangDrawer extends PApplet {
 
 		TreeLangParser p = new TreeLangParser();
 		try {
-			root = p.parse(new File("tree.tree"));
+			root = p.parse(new File("tree.tree")).getTPic().hashCode();
 		} catch (SyntaxErrorException e) {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();

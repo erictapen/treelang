@@ -2,6 +2,10 @@ package treelang.parser;
 
 import java.util.ArrayList;
 
+import treelang.TStorage;
+import treelang.mutate.MExpression;
+import treelang.mutate.MSimple;
+import treelang.mutate.MWildcard;
 import treelang.picture.TDivide;
 import treelang.picture.TForLoop;
 import treelang.picture.TIdentifier;
@@ -50,7 +54,8 @@ public class PNode {
 	 * Turns an PNode into a TPicture
 	 * 
 	 * @return
-	 * @throws SyntaxErrorException in case of wrong amount of arguments
+	 * @throws SyntaxErrorException
+	 *             in case of wrong amount of arguments
 	 */
 	public TPicture getTPic() throws SyntaxErrorException {
 		ArrayList<TPicture> picChilds = new ArrayList<TPicture>();
@@ -76,30 +81,56 @@ public class PNode {
 				throw new SyntaxErrorException();
 			return new TForLoop(picChilds.get(0), picChilds.get(1), picChilds.get(2));
 		case "+":
-			if(picChilds.size() != 2)
+			if (picChilds.size() != 2)
 				throw new SyntaxErrorException();
 			return new TPlus(picChilds.get(0), picChilds.get(1));
 		case "-":
-			if(picChilds.size() != 2)
+			if (picChilds.size() != 2)
 				throw new SyntaxErrorException();
 			return new TMinus(picChilds.get(0), picChilds.get(1));
 		case "/":
-			if(picChilds.size() != 2)
+			if (picChilds.size() != 2)
 				throw new SyntaxErrorException();
 			return new TDivide(picChilds.get(0), picChilds.get(1));
 		case "*":
-			if(picChilds.size() != 2)
+			if (picChilds.size() != 2)
 				throw new SyntaxErrorException();
 			return new TMultiply(picChilds.get(0), picChilds.get(1));
+		case ".": // wildcard character for rule expression, not a valid
+					// treelang expression
+			throw new SyntaxErrorException();
 		default:
 			try {
 				return new TNumber(Integer.decode(caption));
 			} catch (NumberFormatException e) {
-				if(Character.isUpperCase(caption.charAt(0)))
+				if (Character.isUpperCase(caption.charAt(0)))
 					return AbstractAlias.generateAliasExpression(caption, picChilds);
-				return new TIdentifier(this.caption);
+				if (Character.isLowerCase(caption.charAt(0)))
+					return new TIdentifier(this.caption);
+				throw new SyntaxErrorException(); // for rule expressions (which
+													// won't be handled by this
+													// function)
 			}
 		}
+	}
+
+	public MExpression getMExpression() {
+		MExpression result = null;
+		try { // if its a simple one
+			TPicture tpic = this.getTPic();
+			Integer tpicHash = tpic.hashCode();
+			TStorage.gI().put(tpicHash, tpic);
+			result = new MSimple(tpicHash);
+		} catch (SyntaxErrorException e) {
+			if (caption.startsWith(".")) {
+				MExpression[] childs = new MExpression[this.children.size()];
+				for (int i = 0; i < children.size(); i++) {
+					childs[i] = children.get(i).getMExpression();
+				}
+				result = new MWildcard(caption, childs);
+			}
+		}
+		return result;
 	}
 
 	@Override
