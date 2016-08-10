@@ -29,11 +29,11 @@ public class TTranslate implements TPicture {
 		super();
 		this.args = new Integer[ARGUMENT_COUNT];
 		this.args[0] = new Integer(num1.hashCode());
-		TStorage.gI().put(this.args[0], num1);
+		TStorage.gI().putNode(this.args[0], num1);
 		this.args[1] = new Integer(num2.hashCode());
-		TStorage.gI().put(this.args[1], num2);
+		TStorage.gI().putNode(this.args[1], num2);
 		this.args[2] = new Integer(pic.hashCode());
-		TStorage.gI().put(this.args[2], pic);
+		TStorage.gI().putNode(this.args[2], pic);
 		int hash = hashInit;
 		hash = 37 * hash + this.args[0];
 		hash = 37 * hash + this.args[1];
@@ -86,7 +86,7 @@ public class TTranslate implements TPicture {
 			TPicture newNode = new TTranslate(TStorage.gI().get(newNum1), TStorage.gI().get(newNum2),
 					TStorage.gI().get(newPic));
 			Integer newHash = newNode.hashCode();
-			TStorage.gI().put(newHash, newNode);
+			TStorage.gI().putNode(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();

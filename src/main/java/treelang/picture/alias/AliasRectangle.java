@@ -1,32 +1,60 @@
 package treelang.picture.alias;
 
 import processing.core.PApplet;
-import treelang.picture.TIdentifier;
+import treelang.TStorage;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
 
 public final class AliasRectangle extends AbstractAlias implements TPicture {
-	
-	final int ALIAS_ARGUMENT_COUNT;
-	
-	private final TIdentifier arg0 = new TIdentifier("xCoord");
-	private final TIdentifier arg1 = new TIdentifier("yCoord");
-	
 
-	public AliasRectangle(TPicture num1, TPicture num2) {
-		this.ALIAS_ARGUMENT_COUNT = 2;
+	private final Integer hash;
+
+	/**
+	 * op1, op2
+	 * 
+	 */
+	private final int ARGUMENT_COUNT = 2;
+	private final Integer[] args;
+
+	public AliasRectangle(TPicture op0, TPicture op1, Integer hash) {
+		super(hash);
+		this.args = new Integer[ARGUMENT_COUNT];
+		this.args[0] = new Integer(op0.hashCode());
+		TStorage.gI().putNode(this.args[0], op0);
+		this.args[1] = new Integer(op1.hashCode());
+		TStorage.gI().putNode(this.args[1], op1);
+		this.hash = hash;
+	}
+
+	@Override
+	public Integer[] getArgs() {
+		return new Integer[0];
+	}
+
+	@Override
+	public Integer replaceAll(Integer origin, Integer target) {
+		return this.hash;
 	}
 
 	@Override
 	public TNumber getNumber() {
-		// TODO Auto-generated method stub
-		return null;
+		return new TNumber(0);
 	}
 
 	@Override
 	public void draw(PApplet p) {
-		// TODO Auto-generated method stub
+		p.noFill();
+		p.rect(0, 0, TStorage.gI().get(this.args[0]).getNumber().getValue(),
+				TStorage.gI().get(this.args[1]).getNumber().getValue());
+		System.out.println("efficient rect was called.");
+	}
 
+	@Override
+	public String toString() {
+		String res = "Rectangle";
+		res += "\n\t" + TStorage.gI().get(this.args[0]).toString().replaceAll("\n", "\n\t");
+		res += "\n\t" + TStorage.gI().get(this.args[1]).toString().replaceAll("\n", "\n\t");
+		return res;
 	}
 
 }

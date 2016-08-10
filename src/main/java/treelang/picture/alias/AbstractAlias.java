@@ -8,7 +8,6 @@ import treelang.TStorage;
 import treelang.mutate.MExpression;
 import treelang.parser.SyntaxErrorException;
 import treelang.parser.TreeLangParser;
-import treelang.picture.TIdentifier;
 import treelang.picture.TLambda;
 import treelang.picture.TList;
 import treelang.picture.TPicture;
@@ -17,9 +16,6 @@ import treelang.picture.TPicture;
  * TNode for high level functions, which can be implemented in treelang core
  * functionalities. This way, new functions can be implemented faster.
  * 
- * An Alias has no arguments, but can contain TIdentifiers. These are saved at
- * compile time and are replaced if an lambda on higher level provides some
- * value for the identifiers.
  * 
  * @author justin
  *
@@ -27,16 +23,9 @@ import treelang.picture.TPicture;
 public abstract class AbstractAlias implements TPicture {
 
 	final int ARGUMENT_COUNT = 0;
-
-	@Override
-	public Integer[] getArgs() {
-		return new Integer[0];
-	}
-
-	@Override
-	public Integer replaceAll(Integer origin, Integer target) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public AbstractAlias(Integer hash) {
+		TStorage.gI().registerAliasHash(hash);
 	}
 
 	@Override
@@ -62,6 +51,8 @@ public abstract class AbstractAlias implements TPicture {
 	 * ---bl
 	 * @formatter:off
 	 * 
+	 * The whole expression will be transformed into an instance of an alias class, which has the hash of the expression with lambdas wrapped around.
+	 * 
 	 * @param caption
 	 * @param picChilds
 	 * @return
@@ -69,20 +60,17 @@ public abstract class AbstractAlias implements TPicture {
 	public static TPicture generateAliasExpression(String caption, ArrayList<TPicture> picChilds) {
 		try {
 			TreeLangParser p = new TreeLangParser();
-			TList aliasWithIdents = (TList) TStorage.gI().get(p.parse(new File("alias/" + caption + ".tree")));
-			Integer[] aliasChilds = aliasWithIdents.getChildren();
-			// identifiers have length - 1 because the last one is the actual
-			// picture
-			TPicture[] identifiers = new TPicture[aliasChilds.length - 1];
-			for (int i = 0; i < identifiers.length; i++) {
-				TPicture lambdaNode = TStorage.gI().get(aliasChilds[i]);
-				identifiers[i] = ((TIdentifier) lambdaNode).getIdent(); //TODO ??? aus irgendeinem grund dachte ich, da we lambda, aber es ist eigentlich ein ident
+			TList aliasFromFile = (TList) TStorage.gI().get(p.parse(new File("alias/" + caption + ".tree")));
+			//need to find the hash
+			Integer[] children = aliasFromFile.getChildren();
+			Integer resultHash = children[children.length - 1];
+			for (int i = children.length - 2; i >= 0; i--) {
+				TPicture lambda = new TLambda(TStorage.gI().get(children[i]), picChilds.get(i), TStorage.gI().get(resultHash));
+				TStorage.gI().putNode(lambda.hashCode(), lambda);
+				resultHash = lambda.hashCode();
 			}
-			TPicture result = TStorage.gI().get(aliasChilds[aliasChilds.length - 1]);
-			for (int i = identifiers.length - 1; i >= 0; i--) {
-				result = new TLambda(identifiers[i], picChilds.get(i), result);
-				TStorage.gI().put(result.hashCode(), result);
-			}
+			TPicture result = new AliasRectangle(picChilds.get(0), picChilds.get(1), resultHash);
+			TStorage.gI().forcePutNode(resultHash, result);
 			return result;
 		} catch (SyntaxErrorException e) {
 			e.printStackTrace();

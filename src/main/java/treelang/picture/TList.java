@@ -26,7 +26,7 @@ public class TList implements TPicture {
 		for (int i = 0; i < args.length; i++) {
 			Integer pichash = picChilds.get(i).hashCode();
 			args[i] = pichash;
-			TStorage.gI().put(pichash, picChilds.get(i));
+			TStorage.gI().putNode(pichash, picChilds.get(i));
 		}
 		int hash = hashInit;
 		for (Integer x : this.args)
@@ -37,7 +37,7 @@ public class TList implements TPicture {
 	public TList(TPicture picChild) {
 		this.args = new Integer[1];
 		Integer pichash = picChild.hashCode();
-		TStorage.gI().put(pichash, picChild);
+		TStorage.gI().putNode(pichash, picChild);
 		args[0] = pichash;
 		int hash = hashInit;
 		hash = 37 * hash + args[0];
@@ -47,10 +47,10 @@ public class TList implements TPicture {
 	public TList(TPicture p0, TPicture p1) {
 		this.args = new Integer[2];
 		Integer pic0hash = p0.hashCode();
-		TStorage.gI().put(pic0hash, p0);
+		TStorage.gI().putNode(pic0hash, p0);
 		args[0] = pic0hash;
 		Integer pic1hash = p1.hashCode();
-		TStorage.gI().put(pic1hash, p1);
+		TStorage.gI().putNode(pic1hash, p1);
 		args[1] = pic1hash;
 		int hash = hashInit;
 		hash = 37 * hash + args[0];
@@ -96,7 +96,7 @@ public class TList implements TPicture {
 		if (needsUnLambda) {
 			TPicture newNode = new TList(newList);
 			Integer newHash = newNode.hashCode();
-			TStorage.gI().put(newHash, newNode);
+			TStorage.gI().putNode(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();

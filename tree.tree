@@ -1,4 +1,7 @@
-Rectangle
-	150
-	100
+Translate
+	-50
+	-50
+	Rectangle
+		100
+		100
 
