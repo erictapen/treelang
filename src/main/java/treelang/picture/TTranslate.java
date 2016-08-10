@@ -116,7 +116,7 @@ public class TTranslate implements TPicture {
 
 	@Override
 	public String toString() {
-		String res = "Translate";
+		String res = "Translate:" + this.hash;
 		res += "\n\t" + getNum1().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getNum2().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getPic().toString().replaceAll("\n", "\n\t");

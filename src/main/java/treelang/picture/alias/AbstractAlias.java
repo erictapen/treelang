@@ -23,9 +23,17 @@ import treelang.picture.TPicture;
 public abstract class AbstractAlias implements TPicture {
 
 	final int ARGUMENT_COUNT = 0;
+
+	final Integer hash;
 	
 	public AbstractAlias(Integer hash) {
 		TStorage.gI().registerAliasHash(hash);
+		this.hash = hash;
+	}
+
+	@Override
+	public int hashCode() {
+		return hash;
 	}
 
 	@Override

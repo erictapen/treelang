@@ -7,8 +7,6 @@ import treelang.picture.TPicture;
 
 public final class AliasRectangle extends AbstractAlias implements TPicture {
 
-	private final Integer hash;
-
 	/**
 	 * op1, op2
 	 * 
@@ -23,7 +21,6 @@ public final class AliasRectangle extends AbstractAlias implements TPicture {
 		TStorage.gI().putNode(this.args[0], op0);
 		this.args[1] = new Integer(op1.hashCode());
 		TStorage.gI().putNode(this.args[1], op1);
-		this.hash = hash;
 	}
 
 	@Override
@@ -46,12 +43,11 @@ public final class AliasRectangle extends AbstractAlias implements TPicture {
 		p.noFill();
 		p.rect(0, 0, TStorage.gI().get(this.args[0]).getNumber().getValue(),
 				TStorage.gI().get(this.args[1]).getNumber().getValue());
-		System.out.println("efficient rect was called.");
 	}
 
 	@Override
 	public String toString() {
-		String res = "Rectangle";
+		String res = "Rectangle:" + this.hash;
 		res += "\n\t" + TStorage.gI().get(this.args[0]).toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + TStorage.gI().get(this.args[1]).toString().replaceAll("\n", "\n\t");
 		return res;
