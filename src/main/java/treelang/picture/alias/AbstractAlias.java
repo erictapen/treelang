@@ -77,7 +77,16 @@ public abstract class AbstractAlias implements TPicture {
 				TStorage.gI().putNode(lambda.hashCode(), lambda);
 				resultHash = lambda.hashCode();
 			}
-			TPicture result = new AliasRectangle(picChilds.get(0), picChilds.get(1), resultHash);
+			TPicture result = null;
+			switch (caption) {
+			case "Rectangle":
+				result = new AliasRectangle(picChilds.get(0), picChilds.get(1), resultHash);
+				break;
+
+			default:
+				System.out.println("Alias " + caption + " is not registered!");
+				break;
+			}
 			TStorage.gI().forcePutNode(resultHash, result);
 			return result;
 		} catch (SyntaxErrorException e) {
