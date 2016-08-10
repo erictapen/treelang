@@ -21,11 +21,11 @@ public final class TForLoop implements TPicture {
 	public TForLoop(TPicture ident, TPicture var, TPicture expr) {
 		this.args = new Integer[ARGUMENT_COUNT];
 		this.args[0] = new Integer(ident.hashCode());
-		TStorage.gI().put(this.args[0], ident);
+		TStorage.gI().putNode(this.args[0], ident);
 		this.args[1] = new Integer(var.hashCode());
-		TStorage.gI().put(this.args[1], var);
+		TStorage.gI().putNode(this.args[1], var);
 		this.args[2] = new Integer(expr.hashCode());
-		TStorage.gI().put(this.args[2], expr);
+		TStorage.gI().putNode(this.args[2], expr);
 		int hash = hashInit;
 		hash = 37 * hash + this.args[0];
 		hash = 37 * hash + this.args[1];
@@ -80,7 +80,7 @@ public final class TForLoop implements TPicture {
 		if (needsUnLambda) {
 			TPicture newNode = new TForLoop(TStorage.gI().get(args[0]), TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
-			TStorage.gI().put(newHash, newNode);
+			TStorage.gI().putNode(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();

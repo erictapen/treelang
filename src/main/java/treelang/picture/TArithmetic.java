@@ -17,9 +17,9 @@ public abstract class TArithmetic implements TPicture {
 	public TArithmetic(TPicture op1, TPicture op2, int hash) {
 		this.args = new Integer[ARGUMENT_COUNT];
 		this.args[0] = new Integer(op1.hashCode());
-		TStorage.gI().put(this.args[0], op1);
+		TStorage.gI().putNode(this.args[0], op1);
 		this.args[1] = new Integer(op2.hashCode());
-		TStorage.gI().put(this.args[1], op2);
+		TStorage.gI().putNode(this.args[1], op2);
 		hash = 37 * hash + this.args[0];
 		hash = 37 * hash + this.args[0];
 		this.hash = hash;

@@ -13,7 +13,7 @@ public final class TMultiply extends TArithmetic implements TPicture {
 	protected void replaceAllHelper(Integer newOp1, Integer newOp2) {
 		TPicture newNode = new TMultiply(TStorage.gI().get(newOp1), TStorage.gI().get(newOp2));
 		Integer newHash = newNode.hashCode();
-		TStorage.gI().put(newHash, newNode);
+		TStorage.gI().putNode(newHash, newNode);
 	}
 
 	@Override

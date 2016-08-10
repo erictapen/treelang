@@ -14,6 +14,7 @@ import treelang.picture.TPicture;
 import treelang.picture.TPlus;
 import treelang.picture.TPoint;
 import treelang.picture.TTranslate;
+import treelang.picture.alias.AbstractAlias;
 
 /**
  * Helping structure in the parsing process. Makes up a tree structure.
@@ -94,6 +95,8 @@ public class PNode {
 			try {
 				return new TNumber(Integer.decode(caption));
 			} catch (NumberFormatException e) {
+				if(Character.isUpperCase(caption.charAt(0)))
+					return AbstractAlias.generateAliasExpression(caption, picChilds);
 				return new TIdentifier(this.caption);
 			}
 		}
