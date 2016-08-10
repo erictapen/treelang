@@ -44,6 +44,7 @@ public class TLambda implements TPicture {
 		hash = 37 * hash + this.args[1];
 		hash = 37 * hash + this.args[2];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public TPicture getIdent() {
@@ -87,7 +88,8 @@ public class TLambda implements TPicture {
 		if (newExpr != this.args[2])
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TLambda(TStorage.gI().get(args[0]), TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
+			TPicture newNode = new TLambda(TStorage.gI().get(args[0]), TStorage.gI().get(newVar),
+					TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
 			TStorage.gI().putNode(newHash, newNode);
 			return newHash;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import processing.core.PApplet;
+import treelang.TStorage;
 import treelang.mutate.MExpression;
 
 public class TIdentifier implements TPicture {
@@ -20,6 +21,7 @@ public class TIdentifier implements TPicture {
 		int hash = hashInit;
 		hash = 37 * hash + name.hashCode();
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	@Override

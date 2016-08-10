@@ -16,7 +16,8 @@ import treelang.mutate.MExpression;
  */
 public class TTranslate implements TPicture {
 
-	/** num1 num2 pic
+	/**
+	 * num1 num2 pic
 	 * 
 	 */
 	private final int ARGUMENT_COUNT = 3;
@@ -39,6 +40,7 @@ public class TTranslate implements TPicture {
 		hash = 37 * hash + this.args[1];
 		hash = 37 * hash + this.args[2];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	@Override
@@ -70,7 +72,7 @@ public class TTranslate implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash==identifier)
+		if (hash == identifier)
 			return expression;
 		boolean needsUnLambda = false;
 		Integer newNum1 = TStorage.gI().get(this.args[0]).replaceAll(identifier, expression);

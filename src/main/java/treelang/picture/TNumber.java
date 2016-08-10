@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import processing.core.PApplet;
+import treelang.TStorage;
 import treelang.mutate.MExpression;
 
 /**
@@ -27,6 +28,7 @@ public class TNumber implements TPicture {
 		int hash = hashInit;
 		hash = 37 * hash + value;
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public int getValue() {
@@ -50,7 +52,7 @@ public class TNumber implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash==identifier)
+		if (hash == identifier)
 			return expression;
 		return this.hashCode();
 	}

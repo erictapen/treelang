@@ -23,6 +23,7 @@ public abstract class TArithmetic implements TPicture {
 		hash = 37 * hash + this.args[0];
 		hash = 37 * hash + this.args[0];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	@Override

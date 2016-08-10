@@ -32,6 +32,7 @@ public class TList implements TPicture {
 		for (Integer x : this.args)
 			hash = 37 * hash + x;
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public TList(TPicture picChild) {

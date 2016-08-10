@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import processing.core.PApplet;
+import treelang.TStorage;
 import treelang.mutate.MExpression;
 
 /**
@@ -23,6 +24,7 @@ public class TPoint implements TPicture {
 	public TPoint() {
 		super();
 		hash = hashInit;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public TNumber getNumber() {
