@@ -175,7 +175,8 @@ public class PNode {
 					return new MTreeLangNode(TMultiply.class, childs);
 				default: // this should be an alias
 					if (Character.isUpperCase(caption.charAt(0)))
-						return new MTreeLangNode(AbstractAlias.class, childs, this.caption);
+						return new MTreeLangNode(AbstractAlias.getAliasType(caption),
+								childs, this.caption);
 					throw new SyntaxErrorException();
 				}
 			}

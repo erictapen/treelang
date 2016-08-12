@@ -22,7 +22,7 @@ public abstract class AbstractAlias implements TPicture {
 	final int ARGUMENT_COUNT = 0;
 
 	final Integer hash;
-	
+
 	public AbstractAlias(Integer hash) {
 		TStorage.gI().registerAliasHash(hash);
 		this.hash = hash;
@@ -78,6 +78,15 @@ public abstract class AbstractAlias implements TPicture {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static Class<?> getAliasType(String caption) {
+		switch (caption) {
+		case "Rectangle":
+			return AliasRectangle.class;
+		default:
+			return null;
+		}
 	}
 
 }

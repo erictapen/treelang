@@ -86,10 +86,9 @@ public class MTreeLangNode implements MExpression {
 			return (new TPlus(tpics[0], tpics[1])).hashCode();
 		} else if (TTranslate.class.equals(type)) {
 			return (new TTranslate(tpics[0], tpics[1], tpics[2])).hashCode();
-		} else if(AbstractAlias.class.equals(type)) {
+		} else { //this should be an alias then.
 			return (AbstractAlias.generateAliasExpression(this.name, new ArrayList<TPicture>(Arrays.asList(tpics)))).hashCode();
 		}
-		return null; //this shouldn't happen
 	}
 
 	@Override
