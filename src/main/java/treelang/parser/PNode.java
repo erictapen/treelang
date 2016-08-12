@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 import treelang.TStorage;
 import treelang.mutate.MExpression;
-import treelang.mutate.MSimple;
+import treelang.mutate.MTreeLangNode;
+import treelang.mutate.MTreeLangTree;
 import treelang.mutate.MWildcard;
 import treelang.picture.TDivide;
 import treelang.picture.TForLoop;
@@ -114,21 +115,71 @@ public class PNode {
 		}
 	}
 
-	public MExpression getMExpression() {
+	/**
+	 * returns a {@link MExpression}: {@link MTreeLangTree} if it is a valid
+	 * treelang expression. {@link MWildcard} if it starts with a '.',
+	 * {@link MTreeLangNode} if it is a treelang node, but not a valid treelang
+	 * tree.
+	 * 
+	 * @return
+	 * @throws SyntaxErrorException
+	 */
+	public MExpression getMExpression() throws SyntaxErrorException {
 		MExpression result = null;
-		try { // if its a simple one
+		try { // if its a TreeLangTree
 			TPicture tpic = this.getTPic();
 			Integer tpicHash = tpic.hashCode();
 			TStorage.gI().put(tpicHash, tpic);
-			result = new MSimple(tpicHash);
+			result = new MTreeLangTree(tpicHash);
 		} catch (SyntaxErrorException e) {
-			if (caption.startsWith(".")) {
-				MExpression[] childs = new MExpression[this.children.size()];
-				for (int i = 0; i < children.size(); i++) {
-					childs[i] = children.get(i).getMExpression();
-				}
-				result = new MWildcard(caption, childs);
+			MExpression[] childs = new MExpression[this.children.size()];
+			for (int i = 0; i < children.size(); i++) {
+				childs[i] = children.get(i).getMExpression();
 			}
+			if (caption.startsWith(".")) {
+				result = new MWildcard(caption, childs);
+			} else {
+				switch (this.caption) { // Alle treelang nodes without children
+										// don't need to be handled here,
+										// because they will be handled as
+										// MTreeLangTree.
+				case "List":
+					return new MTreeLangNode(TList.class, childs);
+				case "Translate":
+					if (childs.length != 3)
+						throw new SyntaxErrorException();
+					return new MTreeLangNode(TTranslate.class, childs);
+				case "Lambda":
+					if (childs.length != 3)
+						throw new SyntaxErrorException();
+					return new MTreeLangNode(TLambda.class, childs);
+				case "For":
+					if (childs.length != 3)
+						throw new SyntaxErrorException();
+					return new MTreeLangNode(TForLoop.class, childs);
+				case "+":
+					if (childs.length != 2)
+						throw new SyntaxErrorException();
+					return new MTreeLangNode(TPlus.class, childs);
+				case "-":
+					if (childs.length != 2)
+						throw new SyntaxErrorException();
+					return new MTreeLangNode(TMinus.class, childs);
+				case "/":
+					if (childs.length != 2)
+						throw new SyntaxErrorException();
+					return new MTreeLangNode(TDivide.class, childs);
+				case "*":
+					if (childs.length != 2)
+						throw new SyntaxErrorException();
+					return new MTreeLangNode(TMultiply.class, childs);
+				default: // this should be an alias
+					if (Character.isUpperCase(caption.charAt(0)))
+						return new MTreeLangNode(AbstractAlias.class, childs, this.caption);
+					throw new SyntaxErrorException();
+				}
+			}
+
 		}
 		return result;
 	}

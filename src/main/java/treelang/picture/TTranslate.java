@@ -1,11 +1,7 @@
 package treelang.picture;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 import processing.core.PApplet;
 import treelang.TStorage;
-import treelang.mutate.MExpression;
 
 /**
  * A treelang node of type Number -> Number -> Picture -> Picture which moves a
@@ -71,17 +67,17 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash == identifier)
-			return expression;
+	public Integer replaceAll(Integer origin, Integer target) {
+		if (hash == origin)
+			return target;
 		boolean needsUnLambda = false;
-		Integer newNum1 = TStorage.gI().get(this.args[0]).replaceAll(identifier, expression);
+		Integer newNum1 = TStorage.gI().get(this.args[0]).replaceAll(origin, target);
 		if (newNum1 != this.args[0])
 			needsUnLambda = true;
-		Integer newNum2 = TStorage.gI().get(this.args[1]).replaceAll(identifier, expression);
+		Integer newNum2 = TStorage.gI().get(this.args[1]).replaceAll(origin, target);
 		if (newNum2 != this.args[1])
 			needsUnLambda = true;
-		Integer newPic = TStorage.gI().get(this.args[2]).replaceAll(identifier, expression);
+		Integer newPic = TStorage.gI().get(this.args[2]).replaceAll(origin, target);
 		if (newPic != this.args[2])
 			needsUnLambda = true;
 		if (needsUnLambda) {
@@ -92,18 +88,6 @@ public class TTranslate implements TPicture {
 			return newHash;
 		}
 		return this.hashCode();
-	}
-
-	@Override
-	public Integer replace(Stack<Byte> dest, Integer target) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		
-		return null;
 	}
 
 	@Override
