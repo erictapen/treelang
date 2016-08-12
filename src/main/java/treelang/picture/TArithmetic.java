@@ -29,8 +29,7 @@ public abstract class TArithmetic implements TPicture {
 
 	@Override
 	public Integer[] getArgs() {
-		// TODO Auto-generated method stub
-		return null;
+		return args;
 	}
 
 	@Override

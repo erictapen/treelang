@@ -63,17 +63,31 @@ public class MRule {
 					TPicture topPic = picTodo.pop();
 					MWildcard topM = (MWildcard) mTodo.pop();
 					vars.put(topM.getName(), topPic.hashCode());
-					for (TPicture x : TStorage.gI().getAll(topPic.getArgs()))
-						picTodo.push(x);
-					for (MExpression x : topM.getChildren())
-						mTodo.push(x);
+					MExpression[] topMchildren = topM.getChildren();
+					Integer[] topPicArgs = topPic.getArgs();
+					/*
+					 * if there aren't any topMchildren, no tpics should be
+					 * added, because MEexpression structure summerizes multiple
+					 * treelang nodes with one MTreeLangTree.
+					 */
+					for (int i = 0; i < topMchildren.length; i++) {
+						mTodo.push(topMchildren[i]);
+						picTodo.push(TStorage.gI().get(topPicArgs[i]));
+					}
 				} else if (mTodo.peek().getClass().equals(MTreeLangNode.class)) {
 					TPicture topPic = picTodo.pop();
 					MExpression topM = mTodo.pop();
-					for (TPicture x : TStorage.gI().getAll(topPic.getArgs()))
-						picTodo.push(x);
-					for (MExpression x :topM.getChildren())
-						mTodo.push(x);
+					MExpression[] topMchildren = topM.getChildren();
+					Integer[] topPicArgs = topPic.getArgs();
+					/*
+					 * if there aren't any topMchildren, no tpics should be
+					 * added, because MEexpression structure summerizes multiple
+					 * treelang nodes with one MTreeLangTree.
+					 */
+					for (int i = 0; i < topMchildren.length; i++) {
+						mTodo.push(topMchildren[i]);
+						picTodo.push(TStorage.gI().get(topPicArgs[i]));
+					}
 				} else if (mTodo.peek().getClass().equals(MTreeLangTree.class)) {
 					picTodo.pop();
 					mTodo.pop();

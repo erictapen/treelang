@@ -34,7 +34,7 @@ public class MWildcard implements MExpression {
 	public boolean matches(Integer tpic) {
 		boolean result = true;
 		Integer[] tpicChilds = TStorage.gI().get(tpic).getArgs();
-		for (int i = 0; i < tpicChilds.length; i++) {
+		for (int i = 0; i < children.length; i++) {
 			if (!children[i].matches(tpicChilds[i]))
 				result = false;
 		}

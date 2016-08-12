@@ -63,8 +63,7 @@ public class TLambda implements TPicture {
 
 	@Override
 	public Integer[] getArgs() {
-		// TODO Auto-generated method stub
-		return null;
+		return args;
 	}
 
 	@Override
