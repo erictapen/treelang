@@ -1,10 +1,7 @@
 package treelang.picture;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 import processing.core.PApplet;
-import treelang.mutate.MExpression;
+import treelang.TStorage;
 
 /**
  * A basic treelang type which simply holds an Integer. Castable to Picture.
@@ -27,6 +24,7 @@ public class TNumber implements TPicture {
 		int hash = hashInit;
 		hash = 37 * hash + value;
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public int getValue() {
@@ -49,22 +47,10 @@ public class TNumber implements TPicture {
 	}
 
 	@Override
-	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash==identifier)
-			return expression;
+	public Integer replaceAll(Integer origin, Integer target) {
+		if (hash == origin)
+			return target;
 		return this.hashCode();
-	}
-
-	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public void draw(PApplet p) {

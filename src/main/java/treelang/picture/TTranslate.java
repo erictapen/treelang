@@ -1,11 +1,7 @@
 package treelang.picture;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 import processing.core.PApplet;
 import treelang.TStorage;
-import treelang.mutate.MExpression;
 
 /**
  * A treelang node of type Number -> Number -> Picture -> Picture which moves a
@@ -16,7 +12,8 @@ import treelang.mutate.MExpression;
  */
 public class TTranslate implements TPicture {
 
-	/** num1 num2 pic
+	/**
+	 * num1 num2 pic
 	 * 
 	 */
 	private final int ARGUMENT_COUNT = 3;
@@ -39,6 +36,7 @@ public class TTranslate implements TPicture {
 		hash = 37 * hash + this.args[1];
 		hash = 37 * hash + this.args[2];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	@Override
@@ -69,17 +67,17 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash==identifier)
-			return expression;
+	public Integer replaceAll(Integer origin, Integer target) {
+		if (hash == origin)
+			return target;
 		boolean needsUnLambda = false;
-		Integer newNum1 = TStorage.gI().get(this.args[0]).replaceAll(identifier, expression);
+		Integer newNum1 = TStorage.gI().get(this.args[0]).replaceAll(origin, target);
 		if (newNum1 != this.args[0])
 			needsUnLambda = true;
-		Integer newNum2 = TStorage.gI().get(this.args[1]).replaceAll(identifier, expression);
+		Integer newNum2 = TStorage.gI().get(this.args[1]).replaceAll(origin, target);
 		if (newNum2 != this.args[1])
 			needsUnLambda = true;
-		Integer newPic = TStorage.gI().get(this.args[2]).replaceAll(identifier, expression);
+		Integer newPic = TStorage.gI().get(this.args[2]).replaceAll(origin, target);
 		if (newPic != this.args[2])
 			needsUnLambda = true;
 		if (needsUnLambda) {
@@ -93,24 +91,10 @@ public class TTranslate implements TPicture {
 	}
 
 	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void draw(PApplet p) {
-		// if (getPic().getClass() == TPoint.class) {
 		p.pushMatrix();
 		p.translate(getNum1().getNumber().getValue(), getNum2().getNumber().getValue());
 		getPic().draw(p);
-		// }
 		p.popMatrix();
 	}
 

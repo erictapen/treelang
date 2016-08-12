@@ -1,11 +1,8 @@
 package treelang.picture;
 
 import java.util.ArrayList;
-import java.util.Stack;
-
 import processing.core.PApplet;
 import treelang.TStorage;
-import treelang.mutate.MExpression;
 
 /**
  * A treelang node of type Picture, which consists of multiple Pictures. These
@@ -32,6 +29,19 @@ public class TList implements TPicture {
 		for (Integer x : this.args)
 			hash = 37 * hash + x;
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
+	}
+
+	public TList(TPicture[] childs) {
+		this.args = new Integer[childs.length];
+		for (int i = 0; i < this.args.length; i++) {
+			this.args[i] = childs[i].hashCode();
+		}
+		int hash = hashInit;
+		for (Integer x : this.args)
+			hash = 37 * hash + x;
+		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public TList(TPicture picChild) {
@@ -42,6 +52,7 @@ public class TList implements TPicture {
 		int hash = hashInit;
 		hash = 37 * hash + args[0];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public TList(TPicture p0, TPicture p1) {
@@ -56,6 +67,7 @@ public class TList implements TPicture {
 		hash = 37 * hash + args[0];
 		hash = 37 * hash + args[1];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public Integer[] getChildren() {
@@ -82,13 +94,13 @@ public class TList implements TPicture {
 	}
 
 	@Override
-	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash == identifier)
-			return expression;
+	public Integer replaceAll(Integer origin, Integer target) {
+		if (hash == origin)
+			return target;
 		boolean needsUnLambda = false;
 		ArrayList<TPicture> newList = new ArrayList<TPicture>();
 		for (Integer x : this.args) {
-			Integer newEl = TStorage.gI().get(x).replaceAll(identifier, expression);
+			Integer newEl = TStorage.gI().get(x).replaceAll(origin, target);
 			newList.add(TStorage.gI().get(newEl));
 			if (x != newEl)
 				needsUnLambda = true;
@@ -100,18 +112,6 @@ public class TList implements TPicture {
 			return newHash;
 		}
 		return this.hashCode();
-	}
-
-	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
-		// TODO
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

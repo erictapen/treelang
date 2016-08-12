@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-import treelang.picture.TList;
-
 /**
  * Parses an existing treelang file and returns a root object
  * 
@@ -18,7 +16,7 @@ import treelang.picture.TList;
  */
 public class TreeLangParser {
 
-	public Integer parse(File infile) throws SyntaxErrorException {
+	public PNode parse(File infile) throws SyntaxErrorException {
 		try (BufferedReader br = new BufferedReader(new FileReader(infile))) {
 			return parse(br);
 		} catch (FileNotFoundException e) {
@@ -32,7 +30,7 @@ public class TreeLangParser {
 		}
 	}
 
-	public Integer parse(String text) throws SyntaxErrorException {
+	public PNode parse(String text) throws SyntaxErrorException {
 		try (BufferedReader br = new BufferedReader(new StringReader(text))) {
 			return parse(br);
 		} catch (IOException e) {
@@ -42,7 +40,7 @@ public class TreeLangParser {
 		}
 	}
 
-	private Integer parse(BufferedReader br) throws IOException, SyntaxErrorException {
+	private PNode parse(BufferedReader br) throws IOException, SyntaxErrorException {
 		// turn every line into a PNode
 		ArrayList<PNode> cursorList = new ArrayList<PNode>();
 		cursorList.add(new PNode("List"));
@@ -59,7 +57,7 @@ public class TreeLangParser {
 				cursorList.get(lvl - 1).addChild(temp);
 		}
 		//return the first child of the implicit list. makes sense, I promise.
-		return ((TList) cursorList.get(0).getTPic()).getChildren()[0];
+		return cursorList.get(0).getChildren().get(0);
 	}
 
 	private int determineLevel(String line) {

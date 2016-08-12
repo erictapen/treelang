@@ -2,10 +2,7 @@ package treelang.picture.alias;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Stack;
-
 import treelang.TStorage;
-import treelang.mutate.MExpression;
 import treelang.parser.SyntaxErrorException;
 import treelang.parser.TreeLangParser;
 import treelang.picture.TLambda;
@@ -25,7 +22,7 @@ public abstract class AbstractAlias implements TPicture {
 	final int ARGUMENT_COUNT = 0;
 
 	final Integer hash;
-	
+
 	public AbstractAlias(Integer hash) {
 		TStorage.gI().registerAliasHash(hash);
 		this.hash = hash;
@@ -34,18 +31,6 @@ public abstract class AbstractAlias implements TPicture {
 	@Override
 	public int hashCode() {
 		return hash;
-	}
-
-	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**
@@ -68,7 +53,7 @@ public abstract class AbstractAlias implements TPicture {
 	public static TPicture generateAliasExpression(String caption, ArrayList<TPicture> picChilds) {
 		try {
 			TreeLangParser p = new TreeLangParser();
-			TList aliasFromFile = (TList) TStorage.gI().get(p.parse(new File("alias/" + caption + ".tree")));
+			TList aliasFromFile = (TList) p.parse(new File("alias/" + caption + ".tree")).getTPic();
 			//need to find the hash
 			Integer[] children = aliasFromFile.getChildren();
 			Integer resultHash = children[children.length - 1];
@@ -93,6 +78,15 @@ public abstract class AbstractAlias implements TPicture {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static Class<?> getAliasType(String caption) {
+		switch (caption) {
+		case "Rectangle":
+			return AliasRectangle.class;
+		default:
+			return null;
+		}
 	}
 
 }

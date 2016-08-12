@@ -1,15 +1,13 @@
 package treelang.picture;
 
 import java.util.ArrayList;
-import java.util.Stack;
-
 import processing.core.PApplet;
 import treelang.TStorage;
-import treelang.mutate.MExpression;
 
 public final class TForLoop implements TPicture {
 
-	/** ident var expr
+	/**
+	 * ident var expr
 	 * 
 	 */
 	private final int ARGUMENT_COUNT = 3;
@@ -31,6 +29,7 @@ public final class TForLoop implements TPicture {
 		hash = 37 * hash + this.args[1];
 		hash = 37 * hash + this.args[2];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public TPicture getIdent() {
@@ -68,7 +67,7 @@ public final class TForLoop implements TPicture {
 
 	@Override
 	public Integer replaceAll(Integer identifier, Integer expression) {
-		if (hash==identifier)
+		if (hash == identifier)
 			return expression;
 		boolean needsUnLambda = false;
 		Integer newVar = TStorage.gI().get(this.args[1]).replaceAll(identifier, expression);
@@ -78,24 +77,13 @@ public final class TForLoop implements TPicture {
 		if (newExpr != this.args[2])
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TForLoop(TStorage.gI().get(args[0]), TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
+			TPicture newNode = new TForLoop(TStorage.gI().get(args[0]), TStorage.gI().get(newVar),
+					TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
 			TStorage.gI().putNode(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();
-	}
-
-	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

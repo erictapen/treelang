@@ -29,7 +29,7 @@ public class LangDrawer extends PApplet {
 
 		TreeLangParser p = new TreeLangParser();
 		try {
-			root = p.parse(new File("tree.tree"));
+			root = p.parse(new File("tree.tree")).getTPic().hashCode();
 		} catch (SyntaxErrorException e) {
 			System.out.println("Syntax Error!");
 			e.printStackTrace();
@@ -40,6 +40,7 @@ public class LangDrawer extends PApplet {
 		System.out.println(TStorage.gI().get(root));
 		System.out.println(TStorage.gI());
 		System.out.println(m);
+		System.out.println("start draw");
 	}
 
 	public void draw() {
@@ -47,6 +48,6 @@ public class LangDrawer extends PApplet {
 		this.translate(width / 2, height / 2);
 		TStorage.gI().get(root).draw(this);
 		root = m.mutate(root);
-		// System.out.println(TStorage.gI().get(root));
+		System.out.println(TStorage.gI().get(root));
 	}
 }

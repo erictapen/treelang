@@ -1,11 +1,7 @@
 package treelang.picture;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 import processing.core.PApplet;
 import treelang.TStorage;
-import treelang.mutate.MExpression;
 
 /**
  * treelang representation of a lambda expression. This can be used as an
@@ -44,6 +40,7 @@ public class TLambda implements TPicture {
 		hash = 37 * hash + this.args[1];
 		hash = 37 * hash + this.args[2];
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	public TPicture getIdent() {
@@ -66,8 +63,7 @@ public class TLambda implements TPicture {
 
 	@Override
 	public Integer[] getArgs() {
-		// TODO Auto-generated method stub
-		return null;
+		return args;
 	}
 
 	@Override
@@ -87,24 +83,13 @@ public class TLambda implements TPicture {
 		if (newExpr != this.args[2])
 			needsUnLambda = true;
 		if (needsUnLambda) {
-			TPicture newNode = new TLambda(TStorage.gI().get(args[0]), TStorage.gI().get(newVar), TStorage.gI().get(newExpr));
+			TPicture newNode = new TLambda(TStorage.gI().get(args[0]), TStorage.gI().get(newVar),
+					TStorage.gI().get(newExpr));
 			Integer newHash = newNode.hashCode();
 			TStorage.gI().putNode(newHash, newNode);
 			return newHash;
 		}
 		return this.hashCode();
-	}
-
-	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

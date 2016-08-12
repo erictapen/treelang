@@ -1,10 +1,7 @@
 package treelang.picture;
 
-import java.util.ArrayList;
-import java.util.Stack;
-
 import processing.core.PApplet;
-import treelang.mutate.MExpression;
+import treelang.TStorage;
 
 public class TIdentifier implements TPicture {
 
@@ -20,6 +17,7 @@ public class TIdentifier implements TPicture {
 		int hash = hashInit;
 		hash = 37 * hash + name.hashCode();
 		this.hash = hash;
+		TStorage.gI().put(this.hashCode(), this);
 	}
 
 	@Override
@@ -43,18 +41,6 @@ public class TIdentifier implements TPicture {
 			return expression;
 		else
 			return this.hashCode();
-	}
-
-	@Override
-	public Integer replace(Integer origin, Integer target, Stack<Byte> dest) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Stack<Byte>> findMatches(MExpression expression) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

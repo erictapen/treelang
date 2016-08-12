@@ -18,14 +18,14 @@ public final class TPlus extends TArithmetic implements TPicture {
 
 	@Override
 	public TNumber getNumber() {
-		return new TNumber(TStorage.gI().get(getOp1()).getNumber().getValue() + TStorage.gI().get(getOp2()).getNumber().getValue());
+		return new TNumber(getOp1().getNumber().getValue() + getOp2().getNumber().getValue());
 	}
 
 	@Override
 	public String toString() {
 		String res = "+";
-		res += "\n\t" + TStorage.gI().get(getOp1()).toString().replaceAll("\n", "\n\t");
-		res += "\n\t" + TStorage.gI().get(getOp2()).toString().replaceAll("\n", "\n\t");
+		res += "\n\t" + getOp1().toString().replaceAll("\n", "\n\t");
+		res += "\n\t" + getOp2().toString().replaceAll("\n", "\n\t");
 		return res;
 	}
 
