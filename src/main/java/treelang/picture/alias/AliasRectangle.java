@@ -25,7 +25,7 @@ public final class AliasRectangle extends AbstractAlias implements TPicture {
 
 	@Override
 	public Integer[] getArgs() {
-		return new Integer[0];
+		return args;
 	}
 
 	@Override

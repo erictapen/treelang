@@ -33,6 +33,7 @@ public class MTreeLangNode implements MExpression {
 		this.children = args;
 		this.name = null;
 	}
+
 	public MTreeLangNode(Class<?> type, MExpression[] args, String name) {
 		this.type = type;
 		this.children = args;
@@ -46,7 +47,7 @@ public class MTreeLangNode implements MExpression {
 
 	@Override
 	public boolean matches(Integer tpic) {
-		if (!TStorage.gI().get(tpic).getClass().equals(type)) //why?
+		if (!TStorage.gI().get(tpic).getClass().equals(type)) // why?
 			return false;
 		Integer[] tpicChilds = TStorage.gI().get(tpic).getArgs();
 		for (int i = 0; i < tpicChilds.length; i++) {
@@ -86,15 +87,16 @@ public class MTreeLangNode implements MExpression {
 			return (new TPlus(tpics[0], tpics[1])).hashCode();
 		} else if (TTranslate.class.equals(type)) {
 			return (new TTranslate(tpics[0], tpics[1], tpics[2])).hashCode();
-		} else { //this should be an alias then.
-			return (AbstractAlias.generateAliasExpression(this.name, new ArrayList<TPicture>(Arrays.asList(tpics)))).hashCode();
+		} else { // this should be an alias then.
+			return (AbstractAlias.generateAliasExpression(this.name, new ArrayList<TPicture>(Arrays.asList(tpics))))
+					.hashCode();
 		}
 	}
 
 	@Override
 	public String toString() {
 		String res = type.toString();
-		for(MExpression x : this.children) {
+		for (MExpression x : this.children) {
 			res += "\n\t" + x.toString().replaceAll("\n", "\n\t");
 		}
 		return res;
