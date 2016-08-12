@@ -46,7 +46,7 @@ public class MTreeLangNode implements MExpression {
 
 	@Override
 	public boolean matches(Integer tpic) {
-		if (TStorage.gI().get(tpic).getClass().equals(type))
+		if (!TStorage.gI().get(tpic).getClass().equals(type)) //why?
 			return false;
 		Integer[] tpicChilds = TStorage.gI().get(tpic).getArgs();
 		for (int i = 0; i < tpicChilds.length; i++) {
@@ -90,6 +90,15 @@ public class MTreeLangNode implements MExpression {
 			return (AbstractAlias.generateAliasExpression(this.name, new ArrayList<TPicture>(Arrays.asList(tpics)))).hashCode();
 		}
 		return null; //this shouldn't happen
+	}
+
+	@Override
+	public String toString() {
+		String res = type.toString();
+		for(MExpression x : this.children) {
+			res += "\n\t" + x.toString().replaceAll("\n", "\n\t");
+		}
+		return res;
 	}
 
 }

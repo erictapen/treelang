@@ -33,7 +33,7 @@ public class MTreeLangTree implements MExpression {
 
 	@Override
 	public boolean matches(Integer tpic) {
-		return (tpic == value);
+		return (tpic.equals(value));
 	}
 
 	@Override

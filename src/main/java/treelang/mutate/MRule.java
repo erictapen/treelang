@@ -45,7 +45,7 @@ public class MRule {
 		boolean newConstructionNeeded = false;
 		for (int i = 0; i < oldTNodeArgs.length; i++) {
 			newTNodeArgs[i] = TStorage.gI().get(this.apply(oldTNodeArgs[i].hashCode()));
-			newConstructionNeeded |= (newTNodeArgs[i].hashCode() == oldTNodeArgs[i].hashCode());
+			newConstructionNeeded |= !(newTNodeArgs[i].hashCode() == oldTNodeArgs[i].hashCode());
 		}
 		if (newConstructionNeeded) {
 			result = TreeLangNodeFactory.gI().getTNodeWithArguments(TStorage.gI().get(tpic).getClass(), newTNodeArgs);
@@ -59,22 +59,22 @@ public class MRule {
 			Stack<MExpression> mTodo = new Stack<MExpression>();
 			mTodo.push(origin);
 			while (!picTodo.isEmpty()) {
-				if (mTodo.getClass().equals(MWildcard.class)) {
-					vars.put(((MWildcard) mTodo.peek()).getName(), picTodo.peek().hashCode());
-					for (TPicture x : TStorage.gI().getAll(picTodo.peek().getArgs()))
+				if (mTodo.peek().getClass().equals(MWildcard.class)) {
+					TPicture topPic = picTodo.pop();
+					MWildcard topM = (MWildcard) mTodo.pop();
+					vars.put(topM.getName(), topPic.hashCode());
+					for (TPicture x : TStorage.gI().getAll(topPic.getArgs()))
 						picTodo.push(x);
-					for (MExpression x : mTodo.peek().getChildren())
+					for (MExpression x : topM.getChildren())
 						mTodo.push(x);
-					picTodo.pop();
-					mTodo.pop();
-				} else if (mTodo.getClass().equals(MTreeLangNode.class)) {
-					for (TPicture x : TStorage.gI().getAll(picTodo.peek().getArgs()))
+				} else if (mTodo.peek().getClass().equals(MTreeLangNode.class)) {
+					TPicture topPic = picTodo.pop();
+					MExpression topM = mTodo.pop();
+					for (TPicture x : TStorage.gI().getAll(topPic.getArgs()))
 						picTodo.push(x);
-					for (MExpression x : mTodo.peek().getChildren())
+					for (MExpression x :topM.getChildren())
 						mTodo.push(x);
-					picTodo.pop();
-					mTodo.pop();
-				} else if (mTodo.getClass().equals(MTreeLangTree.class)) {
+				} else if (mTodo.peek().getClass().equals(MTreeLangTree.class)) {
 					picTodo.pop();
 					mTodo.pop();
 				}

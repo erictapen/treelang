@@ -52,4 +52,13 @@ public class MWildcard implements MExpression {
 		return vars.get(this.name);
 	}
 
+	@Override
+	public String toString() {
+		String res = this.name;
+		for(MExpression x : this.children) {
+			res += "\n\t" + x.toString().replaceAll("\n", "\n\t");
+		}
+		return res;
+	}
+
 }
