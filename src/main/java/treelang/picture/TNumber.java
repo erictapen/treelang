@@ -63,6 +63,6 @@ public class TNumber implements TPicture {
 
 	@Override
 	public String toString() {
-		return (new Integer(value)).toString();
+		return (new Integer(value)).toString() + ":" + this.hash;
 	}
 }

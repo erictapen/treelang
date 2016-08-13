@@ -50,7 +50,7 @@ public class TIdentifier implements TPicture {
 
 	@Override
 	public String toString() {
-		return "\"" + name + "\"";
+		return "\"" + name + ":" + this.hash + "\"";
 	}
 
 }

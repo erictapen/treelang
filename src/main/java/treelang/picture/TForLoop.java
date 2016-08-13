@@ -97,7 +97,7 @@ public final class TForLoop implements TPicture {
 
 	@Override
 	public String toString() {
-		String res = "For";
+		String res = "For:" + this.hash;
 		res += "\n\t" + getIdent().toString();
 		res += "\n\t" + getVar().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getExpr().toString().replaceAll("\n", "\n\t");

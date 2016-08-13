@@ -73,6 +73,7 @@ public abstract class AbstractAlias implements TPicture {
 				result = new AliasRectangle(picChilds.get(0), picChilds.get(1), resultHash);
 				break;
 			case "Line":
+				System.out.println("Line vorher:" + resultHash + "\n" + TStorage.gI().get(resultHash));
 				result = new AliasLine(picChilds.get(0), picChilds.get(1), resultHash);
 				break;
 			default:

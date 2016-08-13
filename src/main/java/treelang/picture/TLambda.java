@@ -36,7 +36,7 @@ public class TLambda implements TPicture {
 		this.args[2] = new Integer(expr.hashCode());
 		TStorage.gI().putNode(this.args[2], expr);
 		int hash = hashInit;
-		hash = 37 * hash + ident.hashCode();
+		hash = 37 * hash + this.args[0];
 		hash = 37 * hash + this.args[1];
 		hash = 37 * hash + this.args[2];
 		this.hash = hash;
@@ -100,7 +100,7 @@ public class TLambda implements TPicture {
 
 	@Override
 	public String toString() {
-		String res = "Lambda";
+		String res = "Lambda:" + this.hash;
 		res += "\n\t" + getIdent();
 		res += "\n\t" + getVar().toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + getExpr().toString().replaceAll("\n", "\n\t");
