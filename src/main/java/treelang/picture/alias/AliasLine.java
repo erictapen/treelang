@@ -5,7 +5,7 @@ import treelang.TStorage;
 import treelang.picture.TNumber;
 import treelang.picture.TPicture;
 
-public final class AliasRectangle extends AbstractAlias implements TPicture {
+public class AliasLine extends AbstractAlias implements TPicture {
 
 	/**
 	 * op1, op2
@@ -14,16 +14,11 @@ public final class AliasRectangle extends AbstractAlias implements TPicture {
 	private final int ARGUMENT_COUNT = 2;
 	private final Integer[] args;
 
-	public AliasRectangle(TPicture op0, TPicture op1, Integer hash) {
+	public AliasLine(TPicture op0, TPicture op1, Integer hash) {
 		super(hash);
 		this.args = new Integer[ARGUMENT_COUNT];
 		this.args[0] = new Integer(op0.hashCode());
 		this.args[1] = new Integer(op1.hashCode());
-	}
-
-	@Override
-	public Integer[] getArgs() {
-		return args;
 	}
 
 	@Override
@@ -32,15 +27,19 @@ public final class AliasRectangle extends AbstractAlias implements TPicture {
 	}
 
 	@Override
+	public Integer[] getArgs() {
+		return args;
+	}
+
+	@Override
 	public void draw(PApplet p) {
-		p.noFill();
-		p.rect(0, 0, TStorage.gI().get(this.args[0]).getNumber().getValue(),
-				TStorage.gI().get(this.args[1]).getNumber().getValue());
+		p.line(0, 0, TStorage.gI().get(args[0]).getNumber().getValue(),
+				TStorage.gI().get(args[1]).getNumber().getValue());
 	}
 
 	@Override
 	public String toString() {
-		String res = "Rectangle:" + this.hash;
+		String res = "Line:" + this.hash;
 		res += "\n\t" + TStorage.gI().get(this.args[0]).toString().replaceAll("\n", "\n\t");
 		res += "\n\t" + TStorage.gI().get(this.args[1]).toString().replaceAll("\n", "\n\t");
 		return res;

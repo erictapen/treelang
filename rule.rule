@@ -1,10 +1,8 @@
-Rectangle
+Line
 	.x
 	.y
 -->
-Rectangle
-	+
-		.y
-		2
+Line
+	.y
 	.x
 

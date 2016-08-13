@@ -3,7 +3,6 @@ package treelang.mutate;
 import java.util.HashMap;
 
 import treelang.TStorage;
-import treelang.picture.TPicture;
 
 /**
  * Eine Wildcard ist ein beliebiger Treelang Ausdruck.

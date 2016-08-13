@@ -23,7 +23,7 @@ public class LangDrawer extends PApplet {
 	public void setup() {
 
 		super.setup();
-		size(512, 512);
+		size(768, 768);
 		background(0);
 		fill(255, 255, 255);
 

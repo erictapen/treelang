@@ -33,6 +33,11 @@ public abstract class AbstractAlias implements TPicture {
 		return hash;
 	}
 
+	@Override
+	public Integer replaceAll(Integer origin, Integer target) {
+		return this.hash;
+	}
+
 	/**
 	 * Generate alias node. Looks for an accompanying file in alias/ which must have the form
 	 * @formatter:off
@@ -67,7 +72,9 @@ public abstract class AbstractAlias implements TPicture {
 			case "Rectangle":
 				result = new AliasRectangle(picChilds.get(0), picChilds.get(1), resultHash);
 				break;
-
+			case "Line":
+				result = new AliasLine(picChilds.get(0), picChilds.get(1), resultHash);
+				break;
 			default:
 				System.out.println("Alias " + caption + " is not registered!");
 				break;
@@ -84,6 +91,8 @@ public abstract class AbstractAlias implements TPicture {
 		switch (caption) {
 		case "Rectangle":
 			return AliasRectangle.class;
+		case "Line":
+			return AliasLine.class;
 		default:
 			return null;
 		}
